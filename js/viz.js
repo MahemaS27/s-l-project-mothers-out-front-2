@@ -1,5 +1,5 @@
-var width = 960,
-    height = 500,
+var width = 1000,
+    height = 700,
     centered;
 
 var currentState = null; // need to figure out how to populate this?????
@@ -20,15 +20,28 @@ var projection = d3
 
 var path = d3.geoPath().projection(projection);
 
+var state_data = {};
+
 d3.json("js/us.json", function(us) {
-    drawMap(us);
+    d3.tsv("data/us-state-names.tsv", function(data){
+
+        for (i of data) {
+
+            state_data[i.id] = i.name
+        }
+
+        //console.log(state_data);
+        drawMap(us);
+
+    })
+    
 });
 
 
 
 function drawMap(us) {
 
-    console.log(us); // check
+    console.log(state_data); // check
     
 
     //checking if there is state data names
@@ -47,13 +60,19 @@ function drawMap(us) {
         .attr("d", path) // add projectiong
         // clicked state change color to orange
         .on("click", function (d) {
+
+
+            //console.log(d);
+
         d3.selectAll('path').style('fill',null);
         d3.select(this).style("fill","orange");   // need to add a reset button here - make all classed object that are orange back to grey
 
 
         // here populate current state variable
 
-        console.log(d.id, d.properties); // id correseponds to specific state
+        console.log(state_data[d.id]); // id correseponds to specific state
+
+        // set current state varaible
 
 
       })
@@ -74,6 +93,8 @@ function drawMap(us) {
 
 
 }
+
+// getter method for returning 
 
 
 
