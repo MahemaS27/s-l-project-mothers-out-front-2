@@ -20,13 +20,15 @@ var projection = d3
 
 var path = d3.geoPath().projection(projection);
 
-d3.json("us-states.json", function(us) {
+d3.json("js/us.json", function(us) {
     drawMap(us);
 });
 
 
 
 function drawMap(us) {
+
+    console.log(us); // check
     
 
     //checking if there is state data names
