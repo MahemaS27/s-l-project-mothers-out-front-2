@@ -79,8 +79,8 @@ h1, h2, h3 {
 }
 
 .vis-container{
-	display: flex;
-	flex-wrap: wrap;
+	max-width: 650px;
+	margin: 40px auto;
 }
 
 .states{
