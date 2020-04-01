@@ -13,14 +13,15 @@ var currentState = null; // need to figure out how to populate this?????
 
 // adding the filter before we draw the map
 
+console.log(d3.select('#map-container'))
+
+/*
 var dropDown = d3.select("#map-container")
                   .append("select")
                   .attr("tier", "tier-list");
 
-console.log(dropDown)
 
 
-/*
 var options = dropDown.selectAll('option')
       .data(tierData)
       .enter()
