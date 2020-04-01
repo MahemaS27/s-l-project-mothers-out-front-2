@@ -1,7 +1,9 @@
 var parseDate = d3.timeParse("%Y%m%d"); //Time format was different in the temp dataset. So handling the parsing.
-
-
-
+var tierData = [
+  {"NAME": "Total"}, 
+  {"NAME": "Supporting"},
+  {"NAME": "Taking Action"}, 
+  {"Leading":"Leading"}];
 
 d3.csv(
   "data/tempdata.csv",
@@ -75,6 +77,25 @@ var svg = d3
     .attr("width", width)
     .attr("height", height);
 
+// adding the filter drop down to the svg
+
+var dropDown = svg.append("select")
+                  .attr("tier", "tier-list");
+
+console.log(svg);
+
+/*
+var options = dropDown.selectAll('option')
+      .data(tierData)
+      .enter()
+      .append("option");
+options.text(function(d){
+  return d.NAME;
+})
+.attr("value", function(d){
+  return d.NAME;
+});
+*/
 
 // adding the chart subelement
 

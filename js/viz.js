@@ -41,7 +41,7 @@ d3.json("js/us.json", function(us) {
 
 function drawMap(us) {
 
-    console.log(state_data); // check
+    //console.log(state_data); // check
     
 
     //checking if there is state data names
@@ -70,7 +70,7 @@ function drawMap(us) {
 
         // here populate current state variable
 
-        console.log(state_data[d.id]); // id correseponds to specific state
+        //console.log(state_data[d.id]); // id correseponds to specific state
 
         // set current state varaible
 
