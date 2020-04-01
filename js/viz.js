@@ -2,7 +2,36 @@ var width = 1000,
     height = 700,
     centered;
 
+var tierData = [
+  {"NAME": "Total"}, 
+  {"NAME": "Supporting"},
+  {"NAME": "Taking Action"}, 
+  {"NAME":"Leading"}];
+
 var currentState = null; // need to figure out how to populate this?????
+
+
+// adding the filter before we draw the map
+
+var dropDown = d3.select("#map-container")
+                  .append("select")
+                  .attr("tier", "tier-list");
+
+console.log(dropDown)
+
+
+/*
+var options = dropDown.selectAll('option')
+      .data(tierData)
+      .enter()
+      .append("option");
+options.text(function(d){
+  return d.NAME;
+})
+.attr("value", function(d){
+  return d.NAME;
+});
+*/
 
 var svg = d3.
 select('#map-container')
@@ -22,6 +51,7 @@ var path = d3.geoPath().projection(projection);
 
 var state_data = {};
 
+
 d3.json("js/us.json", function(us) {
     d3.tsv("data/us-state-names.tsv", function(data){
 
@@ -40,13 +70,6 @@ d3.json("js/us.json", function(us) {
 
 
 function drawMap(us) {
-
-    //console.log(state_data); // check
-    
-
-    //checking if there is state data names
-
-
 
     //drawing map boundaries
 

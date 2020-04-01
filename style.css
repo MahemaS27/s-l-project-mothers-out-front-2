@@ -111,3 +111,11 @@ h1, h2, h3 {
 path:hover { /* On mouse hover, lighten state color */
 	fill-opacity: .7;
 }
+
+select {
+  /* General styling */
+  height: 30px;
+  width: 100px;
+  border-radius: 0;
+  padding-left: 10px;
+  }
