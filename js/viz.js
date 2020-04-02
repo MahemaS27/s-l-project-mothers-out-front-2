@@ -8,7 +8,7 @@ var tierData = [
   {"NAME": "Taking Action"},
   {"NAME": "Leading"}];
 
-var currentState = null; // need to figure out how to populate this?????
+var currentState = 'National';
 
 // adding the filter before we draw the map
 
@@ -58,6 +58,10 @@ d3.json("js/us.json", function (us) {
 
 function drawMap(us) {
 
+  // adding the header
+
+  document.getElementById('header').innerHTML= 'Membership Growth Overtime: '+ getCurrentState();
+
   //drawing map boundaries
 
   var mapgroup = svg.append("g").attr("class", "mapgroup")
@@ -99,6 +103,8 @@ function onStateClick(d){
   // here populate current state variable when user clicks
 
   currentState = state_data[d.id];
+  document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
+
 
   console.log(currentState);
 }
@@ -106,7 +112,8 @@ function onStateClick(d){
 function reset(){
 
   d3.selectAll(".states").style('fill', '#aaa');
-  currentState = null;
+  currentState = 'National';
+  document.getElementById('header').innerText = 'Membership Growth Overtime: '+ getCurrentState();
 
   console.log(currentState);
 
