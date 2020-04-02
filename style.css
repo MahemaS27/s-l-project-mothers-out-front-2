@@ -101,15 +101,8 @@ h1, h2, h3 {
 	pointer-events: none;
 }
 
-.cities{
-	fill: orange;
-}
 
-.cities.selected{ 
-	fill:red;
-}
-
-#states .active {
+.states .active {
   fill: orange;
 }
 

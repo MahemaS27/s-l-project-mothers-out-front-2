@@ -105,7 +105,7 @@ function onStateClick(d){
 
 function reset(){
 
-  d3.selectAll('path').style('fill', '#aaa');
+  d3.selectAll(".states").style('fill', '#aaa');
   currentState = null;
 
   console.log(currentState);
