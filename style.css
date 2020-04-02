@@ -78,7 +78,12 @@ h1, h2, h3 {
 	}
 }
 
-.vis-container{
+.authentication {
+	max-width: 650px;
+	margin: 40px auto;
+}
+
+.vis-container {
 	max-width: 650px;
 	margin: 40px auto;
 }
