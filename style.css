@@ -101,6 +101,12 @@ h1, h2, h3 {
 	pointer-events: none;
 }
 
+select{
+	width: 200px;
+	height: 30px;
+}
+
+
 
 .states .active {
   fill: orange;

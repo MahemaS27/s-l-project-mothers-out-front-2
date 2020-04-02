@@ -119,7 +119,12 @@ function reset(){
 
 }
 
+function populate_choro(level){
 
+  console.log(getNatlData());
+
+
+}
 
 
 

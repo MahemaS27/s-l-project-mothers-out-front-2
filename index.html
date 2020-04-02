@@ -62,10 +62,7 @@
   <!-- Your visualization here -->
   <body>
     <div class="vis-container">
-      <h2> Membership Levels Across US</h2>
-
-        <div class="slidecontainer">
-  <input type="range" min="1" max="100" value="50">
+      <h1> Mother's Out Front Membership Levels Across US</h1>
 
       <div id="map-container">
         <div id = "reset">
@@ -77,10 +74,16 @@
           />
         </div>
       </div>
+
       <div id="chart-container" >
         <h2 id = 'header'></h2>
+        <div class="slidecontainer">
+          <input type="range" min="2014" max="2020" value="1">
+        </div>
       </div>
+
     </div>
+
   </body>
   
   <!-- Your writeup goes here -->
@@ -153,6 +156,9 @@
   <script src="js/viz.js"></script>
   <script src="js/linechartinteractive.js"></script>
   <script src="https://d3js.org/topojson.v3.min.js"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <script async defer src="js/dataprocessing.js"></script>
   <script async defer src="https://apis.google.com/js/api.js"
     onload="this.onload=function(){};handleClientLoad()"
