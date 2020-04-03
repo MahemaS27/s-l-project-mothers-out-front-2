@@ -39,7 +39,8 @@ var projection = d3
 
 var path = d3.geoPath().projection(projection);
 
-var state_data = {};
+var state_data = {}; // has id : name of state
+var state_code_data={}; // has name of state : abbreviation
 
 d3.json("js/us.json", function (us) {
   d3.tsv("data/us-state-names.tsv", function (data) {
@@ -47,6 +48,10 @@ d3.json("js/us.json", function (us) {
     for (i of data) {
 
       state_data[i.id] = i.name
+    }
+
+    for (i of data){
+      state_code_data[i.name]=i.code
     }
 
     //console.log(state_data);
@@ -57,6 +62,8 @@ d3.json("js/us.json", function (us) {
 });
 
 function drawMap(us) {
+
+  console.log(state_code_data);
 
   // adding the header
 
@@ -106,7 +113,6 @@ function onStateClick(d){
   document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
 
 
-  console.log(currentState);
 }
 
 function reset(){
@@ -120,9 +126,6 @@ function reset(){
 }
 
 function populate_choro(level){
-
-  console.log(getNatlData());
-
 
 }
 

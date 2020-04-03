@@ -297,7 +297,7 @@ function getStateData(state) {
       output.push(volunteerStep)
       output.push(leadingStep)
       output.push(totMembers)
-      console.log(output)
+      //console.log(output)
       return output;
     } else {
       appendPre('No data found.');
@@ -329,9 +329,7 @@ function getNatlData() {
   var OH = getStateData('OH');
   var PA = getStateData('PA');
 
-  appendPre(MA)
-  console.log(MA)
-
+  //appendPre(MA)
   // appendPre(NY.date.length)
   // appendPre(CA.date.length)
   // appendPre(VA.date.length)
@@ -346,4 +344,6 @@ function getNatlData() {
   // for (i = 0; i < VA.date.length; i++) {
 
   // }
+
+
 }
