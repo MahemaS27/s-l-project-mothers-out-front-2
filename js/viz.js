@@ -9,12 +9,14 @@ var tierData = [
   {"NAME": "Leading"}];
 
 var currentState = 'National';
+var currentLevel = 'Total';
 
 // adding the filter before we draw the map
 
 var dropDown = d3.select("#map-container")
 .append("select")
-.attr("tier", "tier-list");
+.attr("tier", "tier-list")
+.attr("id", 'tiers');
 
 var options = dropDown.selectAll('option')
 .data(tierData)
@@ -26,6 +28,7 @@ options.text(function (d) {
 .attr("value", function (d) {
   return d.NAME;
 });
+
 
 var svg = d3.select('#map-container')
 .append('svg')
@@ -63,8 +66,6 @@ d3.json("js/us.json", function (us) {
 
 function drawMap(us) {
 
-  console.log(state_code_data);
-
   // adding the header
 
   document.getElementById('header').innerHTML= 'Membership Growth Overtime: '+ getCurrentState();
@@ -78,7 +79,7 @@ function drawMap(us) {
   .data(topojson.feature(us, us.objects.states).features)
   .enter()
   .append("path")
-  .attr("d", path) // add projectiong
+  .attr("d", path) // add projection
   // clicked state change color to orange
   .on("click", onStateClick)
   .attr("class", "states");
@@ -94,7 +95,16 @@ function drawMap(us) {
   .attr("id", "state-borders")
   .attr("d", path);
 
+
+
 }
+
+// on change of select update the current level and chang ethe color + data shown
+d3.select('select').on("change", function(d){
+  var selected = document.getElementById('tiers');
+  currentLevel = selected.options[selected.selectedIndex].value;
+
+});
 
 // getter method for return the current state
 function getCurrentState() {
@@ -121,13 +131,14 @@ function reset(){
   currentState = 'National';
   document.getElementById('header').innerText = 'Membership Growth Overtime: '+ getCurrentState();
 
-  console.log(currentState);
+  //console.log(currentState);
 
 }
 
 function populate_choro(level){
 
 }
+
 
 
 
