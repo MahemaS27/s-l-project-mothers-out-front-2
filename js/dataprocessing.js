@@ -312,6 +312,10 @@ function getStateData(state) {
       output.push(volunteerStep)
       output.push(leadingStep)
       output.push(totMembers)
+<<<<<<< HEAD
+=======
+      //console.log(output)
+>>>>>>> 588c99a1a47bf5e41114823882c496719d0f8cb3
       return output;
     } else {
       appendPre('No data found.');
@@ -331,6 +335,7 @@ function getStateData(state) {
 */
 function getNatlData() {
   // Get the arrays for each state
+<<<<<<< HEAD
   MA = getStateData('MA');
   NY = getStateData('NY');
   CA = getStateData('CA');
@@ -342,8 +347,36 @@ function getNatlData() {
   NH = getStateData('NH');
   OH = getStateData('OH');
   PA = getStateData('PA');
+=======
+  var MA = getStateData('MA');
+  var NY = getStateData('NY');
+  var CA = getStateData('CA');
+  var VA = getStateData('VA');
+  var CO = getStateData('CO');
+  var MI = getStateData('MI');
+  var WA = getStateData('WA');
+  var AL = getStateData('AL');
+  var NH = getStateData('NH');
+  var OH = getStateData('OH');
+  var PA = getStateData('PA');
+
+
+  //appendPre(MA)
+  // appendPre(NY.date.length)
+  // appendPre(CA.date.length)
+  // appendPre(VA.date.length)
+  // appendPre(CO.date.length)
+  // appendPre(MI.date.length)
+  // appendPre(WA.date.length)
+  // appendPre(AL.date.length)
+  // appendPre(NH.date.length)
+  // appendPre(OH.date.length)
+  // appendPre(PA.date.length)
+>>>>>>> 588c99a1a47bf5e41114823882c496719d0f8cb3
 
   // for (i = 0; i < MA[0].length; i++) {
 
   // }
+
+
 }

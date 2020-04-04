@@ -31,6 +31,7 @@
   <!-- Your writeup goes here -->
   <div class = "content-column">
   
+  <h1>Mother’s Out Front Member Visualization Across Time</h1>
     <h1>Project Team #: Topic, DS 4200 S20</h1>
     
     <p><strong>Mahema Singh</strong>, <strong>Karen Li</strong>, <strong>Chloe Gold</strong>, <strong>Navin Mani</strong></p>
@@ -45,9 +46,11 @@
     
     <h1>Motivation</h1>
     
-    <p><em>Summary of user needs and motivating questions.</em></p>
+    <p><em>Mothers Out Front is a non-profit organization made up of parents(mainly mothers) focusing on solving environmental justice and safety issues and making the world a better place for the next generation. As the organization tracks its rapid growth of various tiers of members, they would like to use their data and develop insights regarding their growth since formation in 2012. Specifically, The organization would like to use this visualization to educate existing members on growth and areas of improvement.</em></p>
     
-    <p><em>Expectation: There is a clear focus, and a developed explanation of the problem, and a reasonable response is proposed.</em></p>
+    <p><em>By developing this two-panel interactive visualization, our group intends to help MOF answer questions such as what is the distribution of members across each state? What is the distribution of membership levels across the country? What is the growth of the distribution of members over time? By presenting these questions through this visualization, complex information will be communicated in a straightforward way (easier for the members to understand). Furthermore, this visualization could be implemented on MOF’s donation page to help attract new members.</em></p>
+
+        <p><em>We decided to implement a chorplete of the USA as one panel and a line chart of the different levels over time on the other. The choropleth map will show the densities of members across each state. We will also be able to filter out different member types to gain more clarity. For example, if a new member wants to see where leaders are located, then they can just filter for leaders in the USA. When you click on a particular state, it will change the line graph. The line graph will then show the growth of the different Mothers Out Front levels over time for that state. This will help show which direction membership groups are growing and specific groups to focus on. </em></p>
 
     
     <h1>Visualization</h1>
@@ -59,11 +62,9 @@
   <!-- Your visualization here -->
   <body>
     <div class="vis-container">
-      
+      <h1> Mother's Out Front Membership Levels Across US</h1>
 
       <div id="map-container">
-
-        <h2> Membership Levels Across US</h2>
         <div id = "reset">
           <input
               name="resetButton"
@@ -73,10 +74,16 @@
           />
         </div>
       </div>
+
       <div id="chart-container" >
-        <h2>Membership Growth Overtime</h2>
+        <h2 id = 'header'></h2>
+        <div class="slidecontainer">
+          <input type="range" min="2014" max="2020" value="1">
+        </div>
       </div>
+
     </div>
+
   </body>
   
   <!-- Your writeup goes here -->
@@ -97,29 +104,39 @@
     <p><em>Final visualization screenshots (PNG images), design justifications, UI walk-through, and linked presentation slides.</em></p>
 
     <h1>Data Analysis</h1>
-    <p><em>Summary of data, data types, and data preprocessing.</em></p>
 
-    <p><em>Expectation: Data sources match the problem statement and are appropriate. These descriptions should be very explicit so someone could read your page and properly reproduce your results.</em></p>
+    <p><em>Data types: String and integers.</em></p>
+
+    <p><em>We were first given over 140 different Google Sheets with all of Mothers Out Front’s data they gathered. We soon realized that a lot of it was not necessary for us because it was either too granular or it did not relate to our field of interest. The data we used was formatted as an excel table with dates on the leftmost column. Moving to the right there were types of memberships (supporter, volunteer, etc) along with their amounts for each date.</em></p>
+
+    <p><em>We needed to remove unnecessary data and  reformat important data. The usable data included membership count for each of the different levels each day by state level and country level. We are utilizing Javascript to access the data from Google Sheets and loading them into arrays. We first needed to get authentication keys and access the specific spreadsheet we were working from each state's data. We also have a function where each time a person signs in we go through all the states and get the updated information. We update the information by calling getNatlData() which goes through each state and sets the sheet range to the desired section on each sheet because most spreadsheets have a start and end point. getNatlData() then calls getStateData(state) which parses through the desired section for the given state and looks at each column: column 0 is the dates, column 1 is the supporter step, column 2 is the volunteer step, column 3 is the leading step. It then stores the elements in each column in each column specific array. Each column specific array gets added to a master array and the master array gets returned.</em></p>
 
     <h1>Task Analysis</h1>
 
-    <p><em>Summary of task table.</em></p>
+    <p><em>Our first domain task is: “What is the distribution of members across each state?”. It’s analytic task was to summarize/compare. We want to summarize the distribution of members per state onto one map so the user can get a quick and easy high level view of member count. We also want the user to compare the total count of all members from one region to another. We are solving this problem by utilizing a heat map to show the different densities of people across the states.</em></p>
 
-    <p><em>Expectation: Clearly describes domain tasks, processes, goals and abstract tasks for domain problems.</em></p>
+    <p><em>Similar to our first domain task, our second one is “What is the distribution of membership levels across the country?” with the analytical task of also summarizing/comparing. We want to summarize the patterns of membership levels across the country by showing distributions of each membership. Another goal is to compare the different level memberships among all the states. To solve this issue, we are including a set of boxes with the different membership levels. Selecting one box can filter out the other membership levels so the user can look at different membership levels individually. This way, if a user wants to find where the leaders are he/she could filter out all other membership levels and the map will change accordingly. </em></p>
+
+    <p><em>Our final domain task is “What is the growth of the distribution of members over time?”. We want to show new members how much the organization has grown over time. This analytic task is to compare. We are going to implement a slider to show the spread of members over time by changing the heatmap based on member count. As you move the slider left and right the heatmap should change with member count changing. We are also implementing a line graph that will show a more specific change of membership levels over time on a country level and state level.</em></p>
+
+      <p><em>The search tasks for all of the domain tasks are lookup and browse. In all of the cases we want the user to look up specific information ex: How many people supporting are there in NY. Another goal is to have the user explore the data and find patterns of their own.</em></p>
+
+       <p><em>Based on the task analysis done in the table above, our visualization will be primarily for “present” type consumption. This is because the main group of users for this viz will be people interested in learning about the organization or monitoring the progress of the organization. This can be used to show on the website/donor page people can learn about the reach in each region that Mother’s out Front operates. These tasks fall under more of a presentation task, wherein the data is to be communicated to members and the story of the organization is being shown through the data. </em></p>
+
 
     <h1>Design Process</h1>
     
-    <p><em>Sketches and design choices to justify final visualization.</em></p>
+    <p><em>Below is our group's design process:</em></p>
 
-    <p><em>Expectation: Evidence of iterative improvement.
-    Logical discussion of design choices grounded in theory from course.
-    Discusses feedback from usability testing.</em></p>
+    <iframe width = 750 height = 750 src="https://docs.google.com/document/d/e/2PACX-1vQG41FC86I1objKeOs1F05KoVjuF1Rj_L_VWdn1SYfVqznSD4uTqWq1TXFq3iigepnNF7NW1LcYNRoW/pub?embedded=true"></iframe>
+    
+    <p><em>ADD FEEDBACK FROM US TESTING</em></p>
 
 
     <h1>Conclusion</h1>
 
     <p><em>Short summary of work completed and areas for improvement/future-work.</em></p>
-    
+
     <p><em>Expectation: Meaningfully wraps up project and has good future directions.</em></p>
 
     
@@ -139,6 +156,9 @@
   <script src="js/viz.js"></script>
   <script src="js/linechartinteractive.js"></script>
   <script src="https://d3js.org/topojson.v3.min.js"></script>
+  <script src="https://d3js.org/d3-color.v1.min.js"></script>
+  <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <script async defer src="js/dataprocessing.js"></script>
   <script async defer src="https://apis.google.com/js/api.js"
     type ="text/javascript"

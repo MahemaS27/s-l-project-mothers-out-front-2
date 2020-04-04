@@ -2,19 +2,30 @@ var width = 1000,
     height = 700,
     centered;
 
+
+
 var tierData = [
   {"NAME": "Total"},
   {"NAME": "Supporting"},
   {"NAME": "Taking Action"},
   {"NAME": "Leading"}];
 
-var currentState = null; // need to figure out how to populate this?????
+var currentState = 'National';
+var currentLevel = 'Total';
+
+// max and mins of color scale - changes depending on tier
+var minScale = 0;
+var maxScale = null;
+
+//the current year
+var currentYear = 2020;
 
 // adding the filter before we draw the map
 
 var dropDown = d3.select("#map-container")
 .append("select")
-.attr("tier", "tier-list");
+.attr("tier", "tier-list")
+.attr("id", 'tiers');
 
 var options = dropDown.selectAll('option')
 .data(tierData)
@@ -26,6 +37,7 @@ options.text(function (d) {
 .attr("value", function (d) {
   return d.NAME;
 });
+
 
 var svg = d3.select('#map-container')
 .append('svg')
@@ -39,7 +51,10 @@ var projection = d3
 
 var path = d3.geoPath().projection(projection);
 
-var state_data = {};
+var state_data = {}; // has id : name of state // for drawing map
+var state_code_data={}; // has name of state : abbreviation
+
+var national_data = getNatlData(); //Todo not implemented yet
 
 d3.json("js/us.json", function (us) {
   d3.tsv("data/us-state-names.tsv", function (data) {
@@ -47,6 +62,10 @@ d3.json("js/us.json", function (us) {
     for (i of data) {
 
       state_data[i.id] = i.name
+    }
+
+    for (i of data){
+      state_code_data[i.name]=i.code
     }
 
     //console.log(state_data);
@@ -58,6 +77,13 @@ d3.json("js/us.json", function (us) {
 
 function drawMap(us) {
 
+  // set the national max scale
+  maxScale = getMaxScale();
+
+  // adding the header
+
+  document.getElementById('header').innerHTML= 'Membership Growth Overtime: '+ getCurrentState();
+
   //drawing map boundaries
 
   var mapgroup = svg.append("g").attr("class", "mapgroup")
@@ -67,7 +93,7 @@ function drawMap(us) {
   .data(topojson.feature(us, us.objects.states).features)
   .enter()
   .append("path")
-  .attr("d", path) // add projectiong
+  .attr("d", path) // add projection
   // clicked state change color to orange
   .on("click", onStateClick)
   .attr("class", "states");
@@ -83,7 +109,24 @@ function drawMap(us) {
   .attr("id", "state-borders")
   .attr("d", path);
 
+
+
 }
+
+// on change of select update the current level and chang ethe color + data shown
+d3.select('select').on("change", function(d){
+  var selected = document.getElementById('tiers');
+  currentLevel = selected.options[selected.selectedIndex].value;
+
+  //TODO
+  // get new max scale and change color of the map
+
+  maxScale=getMaxScale();
+
+  // do something to use that max scale, line chart, color scle
+
+
+});
 
 // getter method for return the current state
 function getCurrentState() {
@@ -99,20 +142,44 @@ function onStateClick(d){
   // here populate current state variable when user clicks
 
   currentState = state_data[d.id];
+  document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
 
-  console.log(currentState);
+
+
 }
 
 function reset(){
 
-  d3.selectAll('path').style('fill', '#aaa');
-  currentState = null;
+  d3.selectAll(".states").style('fill', '#aaa');
+  currentState = 'National';
+  document.getElementById('header').innerText = 'Membership Growth Overtime: '+ getCurrentState();
 
-  console.log(currentState);
+  //console.log(currentState);
 
 }
 
 
+function getMaxScale(){
+  // use variable current Level to derive the max count for that specific level
+  console.log('I got called: Max Scale');
+
+  /*
+  Example: loading the page is current Level - Total
+   */
+
+
+  // need a parse date to find the range of indices to pull from
+
+  switch(currentLevel) {
+
+
+
+    case 'Total':
+      return Math.max(national_data[0]);
+
+  }
+
+}
 
 
 

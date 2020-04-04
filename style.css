@@ -96,15 +96,14 @@ h1, h2, h3 {
 	pointer-events: none;
 }
 
-.cities{
-	fill: orange;
+select{
+	width: 200px;
+	height: 30px;
 }
 
-.cities.selected{ 
-	fill:red;
-}
 
-#states .active {
+
+.states .active {
   fill: orange;
 }
 
