@@ -19,6 +19,19 @@ var SPREADSHEET_ID = '1PI-Ouc8v2fXHk0WAMRx6RF0lLiMBWzhIdIKEa8TaUbo';
 // All states with data
 var STATES = ['MA', 'NY', 'CA', 'VA', 'CO', 'MI', 'WA', 'AL', 'NH', 'OH', 'PA'];
 
+// Instantiate global variables for each state
+var MA;
+var NY;
+var CA;
+var VA;
+var CO;
+var MI;
+var WA;
+var AL;
+var NH;
+var OH;
+var PA;
+
 /**
  *  On load, called to load the auth2 library and API client library.
  */
@@ -161,7 +174,7 @@ function getWAData() {
           for (i = 1; i < range.values.length; i++) {
             var row = range.values[i];
             // Add the desired columns to the correct array
-            date.push(new Date(row[0]).toLocaleDateString())
+            date.push(new Date(row[0]))
             supporterStep2.push(parseInt(row[1]))
             volunteerStep2.push(parseInt(row[2]))
             leadingStep2.push(parseInt(row[3]))
@@ -181,7 +194,8 @@ function getWAData() {
           output.push(volunteerStep)
           output.push(leadingStep)
           output.push(totMembers)
-          return output;
+          WA = output;
+          return WA;
         } else {
           appendPre('No data found.');
           throw 'No data found.';
@@ -215,9 +229,18 @@ function getStateData(state) {
     throw 'Error: Invalid State Choice';
   }
 
+  // Instatiate arrays
+  var output = [];
+  var date = [];
+  var supporterStep = [];
+  var volunteerStep = [];
+  var leadingStep = [];
+  var totMembers = [];
+
   // WA is an anomoly that requires extra calculation
-  if (state == 'WA') {
-    return getWAData();
+  if (state === 'WA') {
+    output = getWAData();
+    return output;
   }
 
   // Get the sheet range for the desired state
@@ -254,14 +277,6 @@ function getStateData(state) {
       sheetRange = 'Exp, Pennsylvania!A45:E';
       break;
   }
-
-  // Instatiate arrays
-  var output = [];
-  var date = [];
-  var supporterStep = [];
-  var volunteerStep = [];
-  var leadingStep = [];
-  var totMembers = [];
   
   // Get the spreadsheet
   gapi.client.sheets.spreadsheets.values.get({
@@ -280,12 +295,12 @@ function getStateData(state) {
       for (i = 1; i < range.values.length; i++) {
         var row = range.values[i];
         // Add the desired columns to the correct array
-        date.push(new Date(row[0]).toLocaleDateString())
+        date.push(new Date(row[0]))
         supporterStep.push(parseInt(row[1]))
         volunteerStep.push(parseInt(row[2]))
         leadingStep.push(parseInt(row[3]))
         // CA is anomoly
-        if (state == 'CA') {
+        if (state === 'CA') {
           totMembers.push(parseInt(row[5]))
         } else {
           totMembers.push(parseInt(row[4]))
@@ -297,7 +312,6 @@ function getStateData(state) {
       output.push(volunteerStep)
       output.push(leadingStep)
       output.push(totMembers)
-      console.log(output)
       return output;
     } else {
       appendPre('No data found.');
@@ -317,33 +331,19 @@ function getStateData(state) {
 */
 function getNatlData() {
   // Get the arrays for each state
-  var MA = getStateData('MA');
-  var NY = getStateData('NY');
-  var CA = getStateData('CA');
-  var VA = getStateData('VA');
-  var CO = getStateData('CO');
-  var MI = getStateData('MI');
-  var WA = getStateData('WA');
-  var AL = getStateData('AL');
-  var NH = getStateData('NH');
-  var OH = getStateData('OH');
-  var PA = getStateData('PA');
+  MA = getStateData('MA');
+  NY = getStateData('NY');
+  CA = getStateData('CA');
+  VA = getStateData('VA');
+  CO = getStateData('CO');
+  MI = getStateData('MI');
+  WA = getStateData('WA');
+  AL = getStateData('AL');
+  NH = getStateData('NH');
+  OH = getStateData('OH');
+  PA = getStateData('PA');
 
-  appendPre(MA)
-  console.log(MA)
-
-  // appendPre(NY.date.length)
-  // appendPre(CA.date.length)
-  // appendPre(VA.date.length)
-  // appendPre(CO.date.length)
-  // appendPre(MI.date.length)
-  // appendPre(WA.date.length)
-  // appendPre(AL.date.length)
-  // appendPre(NH.date.length)
-  // appendPre(OH.date.length)
-  // appendPre(PA.date.length)
-
-  // for (i = 0; i < VA.date.length; i++) {
+  // for (i = 0; i < MA[0].length; i++) {
 
   // }
 }
