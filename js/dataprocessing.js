@@ -329,6 +329,7 @@ function getNatlData() {
   var OH = getStateData('OH');
   var PA = getStateData('PA');
 
+
   //appendPre(MA)
   // appendPre(NY.date.length)
   // appendPre(CA.date.length)

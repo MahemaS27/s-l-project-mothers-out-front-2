@@ -2,6 +2,8 @@ var width = 1000,
     height = 700,
     centered;
 
+
+
 var tierData = [
   {"NAME": "Total"},
   {"NAME": "Supporting"},
@@ -10,6 +12,13 @@ var tierData = [
 
 var currentState = 'National';
 var currentLevel = 'Total';
+
+// max and mins of color scale - changes depending on tier
+var minScale = 0;
+var maxScale = null;
+
+//the current year
+var currentYear = 2020;
 
 // adding the filter before we draw the map
 
@@ -42,8 +51,10 @@ var projection = d3
 
 var path = d3.geoPath().projection(projection);
 
-var state_data = {}; // has id : name of state
+var state_data = {}; // has id : name of state // for drawing map
 var state_code_data={}; // has name of state : abbreviation
+
+var national_data = getNatlData(); //Todo not implemented yet
 
 d3.json("js/us.json", function (us) {
   d3.tsv("data/us-state-names.tsv", function (data) {
@@ -65,6 +76,9 @@ d3.json("js/us.json", function (us) {
 });
 
 function drawMap(us) {
+
+  // set the national max scale
+  maxScale = getMaxScale();
 
   // adding the header
 
@@ -104,6 +118,14 @@ d3.select('select').on("change", function(d){
   var selected = document.getElementById('tiers');
   currentLevel = selected.options[selected.selectedIndex].value;
 
+  //TODO
+  // get new max scale and change color of the map
+
+  maxScale=getMaxScale();
+
+  // do something to use that max scale, line chart, color scle
+
+
 });
 
 // getter method for return the current state
@@ -123,6 +145,7 @@ function onStateClick(d){
   document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
 
 
+
 }
 
 function reset(){
@@ -135,10 +158,28 @@ function reset(){
 
 }
 
-function populate_choro(level){
+
+function getMaxScale(){
+  // use variable current Level to derive the max count for that specific level
+  console.log('I got called: Max Scale');
+
+  /*
+  Example: loading the page is current Level - Total
+   */
+
+
+  // need a parse date to find the range of indices to pull from
+
+  switch(currentLevel) {
+
+
+
+    case 'Total':
+      return Math.max(national_data[0]);
+
+  }
 
 }
-
 
 
 
