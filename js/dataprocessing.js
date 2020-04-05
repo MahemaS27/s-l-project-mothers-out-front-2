@@ -71,6 +71,7 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
     getNatlData()
+    groupByQuarter('MA')
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -287,10 +288,10 @@ function getStateData(state) {
     if (range.values.length > 0) {
       // Add headers to each array
       date.push('Date')
-      supporterStep.push('\nSupporterStep')
-      volunteerStep.push('\nVolunteerStep')
-      leadingStep.push('\nLeadingStep')
-      totMembers.push('\nTotalMembers')
+      supporterStep.push('SupporterStep')
+      volunteerStep.push('VolunteerStep')
+      leadingStep.push('LeadingStep')
+      totMembers.push('TotalMembers')
     
       for (i = 1; i < range.values.length; i++) {
         var row = range.values[i];
@@ -347,5 +348,52 @@ function getNatlData() {
 
   // }
 
+}
 
+/**
+ * This function groups the data for each state by quarter.
+ * The dates of each quarter's start are 3/31, 6/30, 9/30, 12/31
+ * 
+ * @param {string} state
+ */
+function groupByQuarter(state) {
+   // Ensure this is a valid state
+   if (!STATES.includes(state)) {
+    appendPre('Error: Invalid State Choice');
+    throw 'Error: Invalid State Choice';
+  }
+
+  // Instantiate all important dates
+  var today = new Date();
+  // TODO: Get actual date for line below
+  var startingDate = new Date('9/6/17');
+  var output = [];
+  var quarter = ['Quarter'];
+  var supporterStep = ['SupporterStep'];
+  var volunteerStep = ['VolunteerStep'];
+  var leadingStep = ['LeadingStep'];
+  var totMembers = ['TotalMembers'];
+  var thisState = getStateData(state);
+  console.log(thisState)
+
+  for (i = 0; i < thisState[0].length; i++) {
+    var startDateQ1 = "1/1";
+    var endDateQ1 = "3/31";
+    var endDateQ2 = "6/30";
+    var endDateQ3 = "9/30";
+    var endDateQ4 = "12/31";
+    for (j = 17; j <= 20; j++) {
+      var dates = thisState[0]
+      var thisDate = dates[i]
+      // Add this year to complete this quarter's date
+      startDateQ1.concat(j)
+      endDateQ1.concat(j)
+      endDateQ2.concat(j)
+      endDateQ3.concat(j)
+      endDateQ4.concat(j)
+      
+      var result = new Date(Math.max.apply(Math, dates.filter(function(x){return (thisDate >= startDateQ1 && thisDate <= endDateQ1)})))
+      console.log(result)
+    }
+  }
 }
