@@ -54,7 +54,7 @@ var path = d3.geoPath().projection(projection);
 var state_data = {}; // has id : name of state // for drawing map
 var state_code_data={}; // has name of state : abbreviation
 
-var national_data = getNatlData(); //Todo not implemented yet
+//var national_data = getNatlData(); //Todo not implemented yet
 
 d3.json("js/us.json", function (us) {
   d3.tsv("data/us-state-names.tsv", function (data) {
@@ -170,14 +170,6 @@ function getMaxScale(){
 
   // need a parse date to find the range of indices to pull from
 
-  switch(currentLevel) {
-
-
-
-    case 'Total':
-      return Math.max(national_data[0]);
-
-  }
 
 }
 
