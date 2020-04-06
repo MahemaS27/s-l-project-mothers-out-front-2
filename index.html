@@ -109,7 +109,11 @@
 
     <p><em>We were first given over 140 different Google Sheets with all of Mothers Out Front’s data they gathered. We soon realized that a lot of it was not necessary for us because it was either too granular or it did not relate to our field of interest. The data we used was formatted as an excel table with dates on the leftmost column. Moving to the right there were types of memberships (supporter, volunteer, etc) along with their amounts for each date.</em></p>
 
-    <p><em>We needed to remove unnecessary data and  reformat important data. The usable data included membership count for each of the different levels each day by state level and country level. We are utilizing Javascript to access the data from Google Sheets and loading them into arrays. We first needed to get authentication keys and access the specific spreadsheet we were working from each state's data. We also have a function where each time a person signs in we go through all the states and get the updated information. We update the information by calling getNatlData() which goes through each state and sets the sheet range to the desired section on each sheet because most spreadsheets have a start and end point. getNatlData() then calls getStateData(state) which parses through the desired section for the given state and looks at each column: column 0 is the dates, column 1 is the supporter step, column 2 is the volunteer step, column 3 is the leading step. It then stores the elements in each column in each column specific array. Each column specific array gets added to a master array and the master array gets returned.</em></p>
+     <p><em>We needed to remove unnecessary data and reformat important data. The usable data included membership count for each of the different levels each day by state level and country level. We are utilizing Javascript to access the data from Google Sheets and loading them into arrays. We first needed to get authentication keys and access the specific spreadsheet we were working from each state's data. We also have a function where each time a person signs in we go through all the states and get the updated information. We update the information by calling getNatlData() which goes through each state and sets the sheet range to the desired section on each sheet because most spreadsheets have a start and end point. getNatlData() then calls getStateData(state) which parses through the desired section for the given state and looks at each column: column 0 is the dates, column 1 is the supporter step, column 2 is the volunteer step, column 3 is the leading step. It then stores the elements in each column in each column specific array. Each column specific array gets added to a master array and the master array gets returned.</em></p>
+
+     <p><em>We are still working on updating our data and making it so that we don't have
+     to access Google Sheets with the API. We would like to have a remote copy of the data
+   for better security and accessibility.</em></p>
 
     <h1>Task Analysis</h1>
 
@@ -143,6 +147,12 @@
     <h1>Acknowledgments</h1>
 
     <p><em>List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.</em></p>
+
+    https://github.com/NEU-DS-4200-S20-Staff/in-class-programming-d3-tutorial
+
+    https://github.com/NEU-DS-4200-S20/in-class-programming-d3-line-chart-aditeyapandey
+    
+    https://developers.google.com/sheets/api
     
     <ul>
       <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
