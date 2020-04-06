@@ -20,6 +20,7 @@ var SPREADSHEET_ID = '1PI-Ouc8v2fXHk0WAMRx6RF0lLiMBWzhIdIKEa8TaUbo';
 var STATES = ['MA', 'NY', 'CA', 'VA', 'CO', 'MI', 'WA', 'AL', 'NH', 'OH', 'PA'];
 
 // Instantiate global variables for each state
+
 var MA;
 var NY;
 var CA;
@@ -31,6 +32,7 @@ var AL;
 var NH;
 var OH;
 var PA;
+
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -70,8 +72,8 @@ function updateSigninStatus(isSignedIn) {
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
-    getNatlData()
-    groupByQuarter('MA')
+    getNatlData();
+    groupByQuarter('MA');
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -344,10 +346,6 @@ function getNatlData() {
   OH = getStateData('OH');
   PA = getStateData('PA');
 
-  // for (i = 0; i < MA[0].length; i++) {
-
-  // }
-
 }
 
 /**
@@ -357,6 +355,15 @@ function getNatlData() {
  * @param {string} state
  */
 function groupByQuarter(state) {
+
+
+d3.csv('data/MA.csv', function (MAdata) {
+
+  console.log(MAdata);
+
+});
+
+
    // Ensure this is a valid state
    if (!STATES.includes(state)) {
     appendPre('Error: Invalid State Choice');
@@ -373,17 +380,25 @@ function groupByQuarter(state) {
   var volunteerStep = ['VolunteerStep'];
   var leadingStep = ['LeadingStep'];
   var totMembers = ['TotalMembers'];
-  var thisState = getStateData(state);
-  console.log(thisState)
+  var thisState = getStateData('MA');
 
-  for (i = 0; i < thisState[0].length; i++) {
+  var dates1;
+
+  // set timeout to get dates
+setTimeout(function(){
+    dates1 = thisState[0];
+  }, 5000);
+
+
+console.log(dates1);
+
+  for (i = 0; i < dates.length; i++) {
     var startDateQ1 = "1/1";
     var endDateQ1 = "3/31";
     var endDateQ2 = "6/30";
     var endDateQ3 = "9/30";
     var endDateQ4 = "12/31";
     for (j = 17; j <= 20; j++) {
-      var dates = thisState[0]
       var thisDate = dates[i]
       // Add this year to complete this quarter's date
       startDateQ1.concat(j)
@@ -393,7 +408,9 @@ function groupByQuarter(state) {
       endDateQ4.concat(j)
       
       var result = new Date(Math.max.apply(Math, dates.filter(function(x){return (thisDate >= startDateQ1 && thisDate <= endDateQ1)})))
-      console.log(result)
+      //console.log(result)
     }
   }
 }
+
+
