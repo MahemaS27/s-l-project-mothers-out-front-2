@@ -73,7 +73,7 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
     getNatlData();
-    groupByQuarter('MA');
+    //groupByQuarter('MA');
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -357,13 +357,6 @@ function getNatlData() {
 function groupByQuarter(state) {
 
 
-d3.csv('data/MA.csv', function (MAdata) {
-
-  console.log(MAdata);
-
-});
-
-
    // Ensure this is a valid state
    if (!STATES.includes(state)) {
     appendPre('Error: Invalid State Choice');
@@ -389,8 +382,6 @@ setTimeout(function(){
     dates1 = thisState[0];
   }, 5000);
 
-
-console.log(dates1);
 
   for (i = 0; i < dates.length; i++) {
     var startDateQ1 = "1/1";

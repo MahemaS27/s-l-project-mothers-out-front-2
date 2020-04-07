@@ -17,4 +17,4 @@ df.set_index('dates', inplace=True)
 df.index = pd.to_datetime(df.index)
 
 # resample by quarters and print as csv
-df.resample(rule='Q').last().to_csv("PA_quarters")
+df.resample(rule='Q').last().to_csv("PA_quarters.csv")

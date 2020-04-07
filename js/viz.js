@@ -160,8 +160,7 @@ function reset(){
 
 
 function getMaxScale(){
-  // use variable current Level to derive the max count for that specific level
-  console.log('I got called: Max Scale');
+
 
   /*
   Example: loading the page is current Level - Total
