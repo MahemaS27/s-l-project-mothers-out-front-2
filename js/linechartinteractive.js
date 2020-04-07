@@ -7,7 +7,7 @@ NOTE: This code is adapted from aditeya's in class linechart interaction example
 var parseDate = d3.timeParse("%Y-%m-%d"); //Time format was different in the count dataset. So handling the parsing.
 
 d3.csv(
-    "data/MA_quarters.csv",
+    "data/MA_quarters.csv", // replace with current state
     function(d) {
       return {
         dates: parseDate(d.dates),

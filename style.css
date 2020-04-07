@@ -138,3 +138,9 @@ select {
   border-radius: 0;
   padding-left: 10px;
   }
+
+.dataLine {
+	stroke: #4f1b26;
+	stroke-width: 5px;
+	fill: none;
+}
