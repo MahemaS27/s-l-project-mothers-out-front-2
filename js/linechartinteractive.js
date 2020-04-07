@@ -1,3 +1,9 @@
+/*
+
+NOTE: This code is adapted from aditeya's in class linechart interaction example. The source is cited in the index.html. :)
+ */
+
+
 var parseDate = d3.timeParse("%Y-%m-%d"); //Time format was different in the count dataset. So handling the parsing.
 
 d3.csv(
@@ -34,10 +40,10 @@ function linechart(data) {
 
 
   series = [
-    { id: "supporters", value: supporters },
-    { id: "volunteers", value: volunteers },
-    { id: "leaders", value: leaders },
-    { id: "total", value: totals }
+    { id: "supporters", count: supporters },
+    { id: "volunteers", count: volunteers },
+    { id: "leaders", count: leaders },
+    { id: "total", count: totals }
   ];
   //==============Wrangling Data for Creating Multi_Line Visualization================
 
@@ -50,7 +56,7 @@ function linechart(data) {
   });
   //Nested max calculation
   var maxCount = d3.max(series, function (arrays) {
-    return d3.max(arrays.value, function (d) {
+    return d3.max(arrays.count, function (d) {
       return d.count;
     });
   });
@@ -109,5 +115,19 @@ function linechart(data) {
   .attr("class", "y axis")
   .attr("transform", "translate(0, 0)")
   .call(yAxis);
+
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  var line = d3
+  .line()
+  .x(function(d) {
+    return xScale(d.date);
+  })
+  .y(function(d) {
+    return yScale(d.temp);
+  });
+
+
+
 
 }
