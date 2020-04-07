@@ -121,11 +121,59 @@ function linechart(data) {
   var line = d3
   .line()
   .x(function(d) {
-    return xScale(d.date);
+    return xScale(d.dates);
   })
   .y(function(d) {
-    return yScale(d.temp);
+    return yScale(d.count);
   });
+
+  chartGroup
+  .append("g")
+  .selectAll("path")
+  .data(series)
+  .enter()
+  .append("path")
+  .attr("d", function(d, i) {
+    return line(d.count);
+  })
+  .style("stroke", function(d, i) {
+    return color(d.id);
+  })
+  .attr("class", "dataLine")
+  .attr("id", function(d) {
+    return d.id; // Adding an id to select the visualization for interactivity with external html elements (selectbox)
+  })
+
+  .on("mouseover", function(d) {
+    // Selected Element
+    d3.select("#info")
+    .attr("x", d3.mouse(this)[0] + 10) // Padding to move text away from the mouse pointer
+    .attr("y", d3.mouse(this)[1] + 15) // Padding to move text away from the mouse pointer
+    .style("display", "")
+    .text(d.id);
+    //Reduce opacity of all the paths
+    d3.selectAll("path").attr("opacity", "0.1");
+    //Restore the opacity of selected path
+    d3.select("#" + d.id).attr("opacity", "1");
+  })
+
+  .on("mouseout", function(d) {
+    // Remove Label
+    d3.select("#info").style("display", "none");
+
+    //Restore the opacity of all paths
+    d3.selectAll("path").attr("opacity", "1");
+  });
+
+  // Adding a text element to show the city name
+  chartGroup
+  .append("text")
+  .attr("id", "info")
+  .attr("x", 0)
+  .attr("y", 0)
+  .style("font-size", "30px")
+  .style("background-color", "white")
+  .style("display", "none");
 
 
 
