@@ -63,8 +63,8 @@ function linechart(data) {
 
   //console.log(maxDate, minDate, maxCount)
 
-  var width = 1200;
-  var height = 800;
+  var width = 800;
+  var height = 500;
   var margin = {
     top: 30,
     bottom: 30,
@@ -174,8 +174,6 @@ function linechart(data) {
   .style("font-size", "30px")
   .style("background-color", "white")
   .style("display", "none");
-
-
 
 
 }
