@@ -86,6 +86,7 @@ d3.json("js/us.json", function (us) {
     // console.log(allData.California[11].total); -> this is how we access a specific value
 
     drawMap(us, data, allData);
+    drawLineChart("CA");
 
 });  
 });  
@@ -104,7 +105,7 @@ d3.json("js/us.json", function (us) {
 function drawMap(us, data, allData) {
 
   // set the national max scale
-  maxScale = getMaxScale();
+  // maxScale = getMaxScale();
 
   // adding the header
 
@@ -118,6 +119,11 @@ function drawMap(us, data, allData) {
   var myColor = d3.scaleLinear()
   .range(["white", "#69b3a2"])
   .domain([-500, 3700]);
+
+  // find the min and max count 
+  function findMinMax(tier){
+
+  }
 
   //fill in the colors
   //TO-DO: 
@@ -184,7 +190,7 @@ d3.select('select').on("change", function(d){
   //TODO
   // get new max scale and change color of the map
 
-  maxScale=getMaxScale();
+  // maxScale = getMaxScale();
 
   // do something to use that max scale, line chart, color scle
 
@@ -221,36 +227,8 @@ function onStateClick(d){
   //re-run the line chart
 }
 
-// function reset(){
-//   d3.selectAll(".states").style('fill', '#aaa');
-//   currentState = 'National';
-//   document.getElementById('header').innerText = 'Membership Growth Overtime: '+ getCurrentState();
-
-//   //console.log(currentState);
-
-// }
-
-
-function getMaxScale(){
-
-
-  /*
-  Example: loading the page is current Level - Total
-   */
-
-
-  // need a parse date to find the range of indices to pull from
-
-  switch(currentLevel) {
-
-
-
-    case 'Total':
-      // return Math.max(national_data[0]);
-
-  }
-
-}
+// check if a state is valid
+// add a hover message to say "no data"
 
 
 /*
@@ -258,11 +236,12 @@ function getMaxScale(){
 NOTE: This code is adapted from aditeya's in class linechart interaction example. The source is cited in the index.html. :)
  */
 
+function drawLineChart(state){ //state should be state abbreviation in string
 
 var parseDate = d3.timeParse("%Y-%m-%d"); //Time format was different in the count dataset. So handling the parsing.
 
 d3.csv(
-    "data/MA_quarters.csv", // replace with current state
+    "data/" + state + "_quarters.csv", // replace with current state
     function(d) {
       return {
         dates: parseDate(d.dates),
@@ -274,7 +253,7 @@ d3.csv(
     },
     linechart
 );
-
+}
 
 
 function linechart(data) {
@@ -318,13 +297,13 @@ function linechart(data) {
 
   //console.log(maxDate, minDate, maxCount)
 
-  var width = 800;
+  var width = 600;
   var height = 500;
   var margin = {
     top: 30,
     bottom: 30,
-    left: 30,
-    right: 30
+    left: 80,
+    right: 100
   };
 
   let svg = d3
@@ -370,8 +349,6 @@ function linechart(data) {
   .attr("class", "y axis")
   .attr("transform", "translate(0, 0)")
   .call(yAxis);
-
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
 
   var line = d3
   .line()
@@ -420,7 +397,7 @@ function linechart(data) {
     d3.selectAll("path").attr("opacity", "1");
   });
 
-  // Adding a text element to show the city name
+  // Adding a text element to show the tier name
   chartGroup
   .append("text")
   .attr("id", "info")
@@ -429,7 +406,6 @@ function linechart(data) {
   .style("font-size", "30px")
   .style("background-color", "white")
   .style("display", "none");
-
 
 }
 
