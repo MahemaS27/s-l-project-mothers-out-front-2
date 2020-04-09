@@ -219,14 +219,14 @@ function onStateClick(d){
 	document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
 }
 
-function reset(){
-  d3.selectAll(".states").style('fill', '#aaa');
-  currentState = 'National';
-  document.getElementById('header').innerText = 'Membership Growth Overtime: '+ getCurrentState();
+// function reset(){
+//   d3.selectAll(".states").style('fill', '#aaa');
+//   currentState = 'National';
+//   document.getElementById('header').innerText = 'Membership Growth Overtime: '+ getCurrentState();
 
-  //console.log(currentState);
+//   //console.log(currentState);
 
-}
+// }
 
 
 function getMaxScale(){
