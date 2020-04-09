@@ -74,9 +74,9 @@ function linechart(data) {
 
   let svg = d3
   .select("#chart-container")
-  .append("svg")
-  .attr("width", width)
-  .attr("height", height);
+  .append("svg").
+  attr("width", "100%").
+  attr("height", "100%");
 
   // adding the chart subelement
 

@@ -16,7 +16,7 @@
     <session id="-1849272935">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
+          <entry key="project.closed" value="14" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="2" />
@@ -53,18 +53,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="87" />
+          <entry key="css" value="97" />
           <entry key="html" value="219" />
-          <entry key="js" value="4050" />
-          <entry key="txt" value="381" />
+          <entry key="js" value="4083" />
+          <entry key="txt" value="472" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="87" />
+          <entry key="CSS" value="97" />
           <entry key="HTML" value="219" />
-          <entry key="JavaScript" value="4050" />
-          <entry key="PLAIN_TEXT" value="381" />
+          <entry key="JavaScript" value="4083" />
+          <entry key="PLAIN_TEXT" value="472" />
         </counts>
       </usages-collector>
     </session>
@@ -74,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
+            <state relative-caret-position="212">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -83,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/linechartinteractive.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+            <state relative-caret-position="302">
+              <caret line="78" column="2" selection-start-line="78" selection-start-column="2" selection-end-line="78" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -116,6 +116,7 @@
       <find>path</find>
       <find>maxTemp</find>
       <find>svg</find>
+      <find>fill</find>
       <find>d.valu</find>
     </findStrings>
     <replaceStrings>
@@ -238,7 +239,7 @@
       <workItem from="1586121302508" duration="2614000" />
       <workItem from="1586124091961" duration="1822000" />
       <workItem from="1586215821127" duration="4731000" />
-      <workItem from="1586277022384" duration="684000" />
+      <workItem from="1586277022384" duration="1883000" />
     </task>
     <task id="LOCAL-00001" summary="added drop down">
       <created>1585782791128</created>
@@ -310,11 +311,25 @@
       <option name="project" value="LOCAL" />
       <updated>1586232730342</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added lines but they are filling in the whole area">
+      <created>1586279423118</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1586279423118</updated>
+    </task>
+    <task id="LOCAL-00012" summary="lines are working, hover, just for MA">
+      <created>1586281054309</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1586281054309</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27233000" />
+    <option name="totallyTimeSpent" value="28432000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -327,9 +342,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11954766" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11954766" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -344,7 +358,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.22876713" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.22876713" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32739726" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -432,7 +446,9 @@
     <MESSAGE value="adding function body" />
     <MESSAGE value="updating names, loading data into line chart, need to figure out why y axis is being cut off." />
     <MESSAGE value="still not sure whats wrong with y, added comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="still not sure whats wrong with y, added comments" />
+    <MESSAGE value="added lines but they are filling in the whole area" />
+    <MESSAGE value="lines are working, hover, just for MA" />
+    <option name="LAST_COMMIT_MESSAGE" value="lines are working, hover, just for MA" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/data/us-state-names.tsv">
@@ -493,8 +509,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/linechartinteractive.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
+        <state relative-caret-position="302">
+          <caret line="78" column="2" selection-start-line="78" selection-start-column="2" selection-end-line="78" selection-end-column="2" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -503,8 +519,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="131" lean-forward="true" selection-start-line="131" selection-end-line="131" />
+        <state relative-caret-position="212">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
