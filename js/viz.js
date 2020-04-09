@@ -8,7 +8,9 @@ var tierData = [
   {"NAME": "Taking Action"},
   {"NAME": "Leading"}];
 
-var currentState = 'National';
+var stateAbbre = {}
+
+var currentState = 'USA';
 var currentLevel = 'Total';
 
 // max and mins of color scale - changes depending on tier
@@ -86,7 +88,7 @@ d3.json("js/us.json", function (us) {
     // console.log(allData.California[11].total); -> this is how we access a specific value
 
     drawMap(us, data, allData);
-    drawLineChart("CA");
+    drawLineChart(currentState);
 
 });  
 });  
@@ -214,13 +216,17 @@ function onStateClick(d){
 
   // here populate current state variable when user clicks
   currentState = state_data[d.id];
+  drawLineChart(state_code_data[currentState]);
+  //console.log(state_code_data[currentState]);
+
   	}
   	else{
   	d3.select(this).style("fill", null);
   	clicked += 1;
   	// console.log(clicked);
 
-  	currentState = 'National';
+  	currentState = 'USA';
+    drawLineChart(currentState);
   	}  
 	document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
 
@@ -237,7 +243,7 @@ NOTE: This code is adapted from aditeya's in class linechart interaction example
  */
 
 function drawLineChart(state){ //state should be state abbreviation in string
-
+//console.log("I am here", state);
 var parseDate = d3.timeParse("%Y-%m-%d"); //Time format was different in the count dataset. So handling the parsing.
 
 d3.csv(
@@ -257,6 +263,7 @@ d3.csv(
 
 
 function linechart(data) {
+  //console.log("I am here", data);
 
   //============Wrangling Data for Creating Multi_Line Visualization===================
   var supporters = [];
@@ -270,7 +277,6 @@ function linechart(data) {
     leaders.push({ dates: element.dates, count: element.leaders });
     totals.push({dates:element.dates, count:element.total})
   });
-
 
 
   series = [
