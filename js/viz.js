@@ -312,6 +312,10 @@ function linechart(data) {
     right: 100
   };
 
+  // need to remove the old svg when clicking a new state
+  let d3select = d3.select("#chart-container svg");
+  d3select.remove();
+
   let svg = d3
   .select("#chart-container")
   .append("svg")
