@@ -393,10 +393,6 @@ function linechart(data) {
     .attr("y", d3.mouse(this)[1] + 15) // Padding to move text away from the mouse pointer
     .style("display", "")
     .text(d.id);
-    //Reduce opacity of all the paths
-    d3.selectAll("path").attr("opacity", "0.1");
-    //Restore the opacity of selected path
-    d3.select("#" + d.id).attr("opacity", "1");
   })
 
   .on("mouseout", function(d) {
