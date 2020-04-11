@@ -61,6 +61,14 @@
       <h1> Mother's Out Front Membership Levels Across US</h1>
 
       <div id="map-container">
+         <!-- Enabling interactivity outside the visualization using filters -->
+      <select id="selectbox">
+        <option value="Total">Total</option>
+        <option value="Leading">Leading</option>
+        <option value="Volunteer">Volunteer</option>
+        <option value="Supporting">Supporting</option>
+      </select>
+      <!-- End of interactivity code the visualization -->
       </div>
 
       <div id="chart-container" >
@@ -157,13 +165,12 @@
   <script src="https://d3js.org/d3-color.v1.min.js"></script>
   <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <script src="js/dataprocessing.js"></script>
   <!--script src = "js/arrays.js"></script-->
-  <script src="https://apis.google.com/js/api.js"
+  <!--script src="https://apis.google.com/js/api.js"
     type ="text/javascript"
     onload="this.onload=function(){};handleClientLoad()"
     onreadystatechange="if (this.readyState === 'complete') this.onload()">
-  </script>
+  </script-->
 
 </body>
 </html>

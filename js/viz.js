@@ -18,34 +18,11 @@ var maxScale = null;
 
 //the current year
 var currentYear = 2020;
-
-// adding the filter before we draw the map
-
-/*
-Dropdown menu with tiers of membership
- */
-
-var dropDown = d3.select("#map-container")
-.append("select")
-.attr("tier", "tier-list")
-.attr("id", 'tiers');
-
-var options = dropDown.selectAll('option')
-.data(tierData)
-.enter()
-.append("option");
-options.text(function (d) {
-  return d.NAME;
-})
-.attr("value", function (d) {
-  return d.NAME;
-});
+var currentTier = 'Total';
 
 
-var svg = d3.select('#map-container')
-.append('svg')
-.attr('width', width)
-.attr('height', height)
+
+
 
 var projection = d3
 .geoAlbersUsa()
@@ -88,7 +65,6 @@ d3.json("js/us.json", function (us) {
     "Michigan": MI, "New Hampshire": NH, "New York": NY, "Ohio": OH, "Pennsylvania": PA, 
     "Virginia": VA,"Washington":WA };
 
-    // console.log(allData.California[11].total); -> this is how we access a specific value
 
     drawMap(us, data, allData);
     drawLineChart(currentState);
@@ -108,6 +84,16 @@ d3.json("js/us.json", function (us) {
 });
 
 function drawMap(us, data, allData) {
+
+  // need to remove the old svg when clicking a new state
+let d3selectMap = d3.select("#map-container svg");
+  d3selectMap.remove();
+
+var svg = d3.select('#map-container')
+.append('svg')
+.attr('width', width)
+.attr('height', height)
+
 
   // set the national max scale
   // maxScale = getMaxScale();
@@ -150,12 +136,25 @@ function drawMap(us, data, allData) {
 		//which is the last row of each subset
 		var index = allData[stateName].length - 1;
 
+
+
+		let tiers_dict = {"Total": allData[stateName][index].total,
+                      "Supporting": allData[stateName][index].supporters,
+                      "Volunteers": allData[stateName][index].volunteers,
+                      "Leading": allData[stateName][index].leaders}
+
 		//return the color given the count, according to our color scale
-		return myColor(allData[stateName][index].total);
+
+		return myColor(tiers_dict[currentTier]);
 		} else {
 		return myColor(500);
 		}
   	}
+
+/*
+Dropdown menu with tiers of membership
+ */
+
 
   mapgroup.append("g")
   .selectAll("path")
@@ -167,6 +166,18 @@ function drawMap(us, data, allData) {
   .on("click", onStateClick)
   .attr("class", "states")
   .attr("fill", fillFunction);
+
+  var selectbox = d3.select("#selectbox").on("change", function() {
+    let selected = document.getElementById('selectbox');
+
+    currentTier =  selected.options[selected.selectedIndex].value
+    console.log(currentTier);
+    // call drawMap again to change color and data
+
+    drawMap(us, data, allData)
+
+
+  });
 
 
 // adding state border
@@ -183,19 +194,7 @@ function drawMap(us, data, allData) {
 }
 
 
-// on change of select update the current level and chang ethe color + data shown
-d3.select('select').on("change", function(d){
-  var selected = document.getElementById('tiers');
-  currentLevel = selected.options[selected.selectedIndex].value;
 
-  //TODO
-  // get new max scale and change color of the map
-
-  // maxScale = getMaxScale();
-
-  // do something to use that max scale, line chart, color scle
-
-});
 
 // getter method for return the current state
 function getCurrentState() {
