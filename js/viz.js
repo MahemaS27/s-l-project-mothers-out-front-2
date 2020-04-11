@@ -20,8 +20,11 @@ var maxScale = null;
 var currentYear = 2020;
 var currentTier = 'Total';
 
-
-
+// colors associated with each tier
+color_tier = {"Total": '#FF0000',
+                      "Supporting": "#1f76b4",
+                      "Volunteers": "#f2840f",
+                      "Leading": "green"}
 
 
 var projection = d3
@@ -108,7 +111,7 @@ var svg = d3.select('#map-container')
 
   // define color scale
   var myColor = d3.scaleLinear()
-  .range(["white", "#FF0000"])
+  .range(["white", color_tier[currentTier]])
   .domain([-500, 3700]);
 
 
@@ -154,8 +157,6 @@ var svg = d3.select('#map-container')
 /*
 Dropdown menu with tiers of membership
  */
-
-
   mapgroup.append("g")
   .selectAll("path")
   .data(topojson.feature(us, us.objects.states).features)

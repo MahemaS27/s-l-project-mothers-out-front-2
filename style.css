@@ -124,7 +124,7 @@ select{
 
 
 .states .active {
-  fill: orange;
+  fill: purple;
 }
 
 path:hover { /* On mouse hover, lighten state color */
