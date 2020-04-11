@@ -119,13 +119,9 @@ function drawMap(us, data, allData) {
 
   // define color scale
   var myColor = d3.scaleLinear()
-  .range(["white", "#69b3a2"])
+  .range(["white", "#FF0000"])
   .domain([-500, 3700]);
 
-  // find the min and max count 
-  function findMinMax(tier){
-
-  }
 
   //fill in the colors
   //TO-DO: 
@@ -230,15 +226,15 @@ function onStateClick(d){
   	}  
 	document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
 
-  //re-run the line chart
 }
 
 // check if a state is valid
 // add a hover message to say "no data"
 
 
-/*
 
+/*
+LINE CHART CODE
 NOTE: This code is adapted from aditeya's in class linechart interaction example. The source is cited in the index.html. :)
  */
 
