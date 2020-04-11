@@ -150,7 +150,7 @@ var svg = d3.select('#map-container')
 
 		return myColor(tiers_dict[currentTier]);
 		} else {
-		return myColor(500);
+		return "#DCDCDC";
 		}
   	}
 
