@@ -5,10 +5,9 @@ var width = 1000,
 var tierData = [
   {"NAME": "Total"},
   {"NAME": "Supporting"},
-  {"NAME": "Taking Action"},
+  {"NAME": "Volunteers"},
   {"NAME": "Leading"}];
 
-var stateAbbre = {}
 
 var currentState = 'USA';
 var currentLevel = 'Total';
@@ -21,6 +20,10 @@ var maxScale = null;
 var currentYear = 2020;
 
 // adding the filter before we draw the map
+
+/*
+Dropdown menu with tiers of membership
+ */
 
 var dropDown = d3.select("#map-container")
 .append("select")
