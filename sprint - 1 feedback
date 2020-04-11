@@ -1,6 +1,7 @@
 Good job on implementing the interactive options although they are not all integrated.
-7.5/10
+6.5/10
 -1 the interaction to highlight the US map is buggy, sometimes requiring two clicks, sometimes one
 -1.5 the tool tip on hover feature on the line chart does not work completely. 
 It gets cut off if I look for information from July - October 
 (and does not show anything for the orange/green lines after october).
+-1 the license is not updated
