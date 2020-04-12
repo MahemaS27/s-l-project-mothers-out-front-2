@@ -114,13 +114,44 @@ var svg = d3.select('#map-container')
   .range(["white", color_tier[currentTier]])
   .domain([-500, 3700]);
 
+var legend = svg
+   .append("g")
+   .attr("class","legend")
+   .attr("width", 140)
+   .attr("height", 200)
+   .selectAll("g")
+   .data([
+    {'color': '#FF0000', 'label': 'Total'},
+    {'color': '#1f76b4', 'label' : 'Supporting'},
+    {'color': '#f2840f', 'label' : 'Volunteers'},
+    {'color': 'green', 'label' : 'Leading'},
+    {'color': 'purple', 'label' : 'Selected State'},
+    {'color': '#DCDCDC', 'label' : 'No data'}
+    ]) //include the color and the actual word on the data
+   // always want to pass an array
 
-  //fill in the colors
-  //TO-DO: 
-  //     add in tiers (add a variable to change the color)
-  //     find min max and max value of all data to set the color scale
-  //     change color according to the time slider
-  //     link the line chart selection
+   .enter()
+   .append("g")
+   .attr("transform", function(d, i){
+    return "translate(0," + i * 20 + ")";
+   });
+
+   legend
+   .append("rect")
+   .attr("width", 18)
+   .attr("height", 18)
+   .style("fill", function(d) {
+    return d.color;
+   });
+
+   legend.append("text")
+   .attr("x", 24)
+   .attr("y", 9)
+   .attr("dy", ".35em")
+   .text(function(d) {
+    return d.label;
+   });
+
 
   let fillFunction = function(d){
 
@@ -193,8 +224,6 @@ Dropdown menu with tiers of membership
   .attr("d", path);
 
 }
-
-
 
 
 // getter method for return the current state
