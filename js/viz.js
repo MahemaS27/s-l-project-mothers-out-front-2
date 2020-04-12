@@ -1,20 +1,8 @@
-var width = 1000,
-    height = 700,
-    centered;
-
-var tierData = [
-  {"NAME": "Total"},
-  {"NAME": "Supporting"},
-  {"NAME": "Volunteers"},
-  {"NAME": "Leading"}];
+var width = 960;
+var height = 500;
 
 
 var currentState = 'USA';
-var currentLevel = 'Total';
-
-// max and mins of color scale - changes depending on tier
-var minScale = 0;
-var maxScale = null;
 
 //the current year
 var currentYear = 2020;
@@ -329,16 +317,15 @@ function linechart(data) {
     });
   });
 
-  //console.log(maxDate, minDate, maxCount)
+  //check the max Date is correct
+  //console.log(maxDate);
 
-  var width = 600;
-  var height = 500;
-  var margin = {
-    top: 30,
-    bottom: 30,
-    left: 80,
-    right: 100
-  };
+  let margin = {
+    top: 20,
+    right: 30,
+    bottom: 40,
+    left: 30
+  }
 
   // need to remove the old svg when clicking a new state
   let d3select = d3.select("#chart-container svg");
