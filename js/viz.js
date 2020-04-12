@@ -1,5 +1,5 @@
-var width = 960;
-var height = 500;
+var width = 720;
+var height = 625;
 
 
 var currentState = 'USA';
@@ -321,10 +321,10 @@ function linechart(data) {
   //console.log(maxDate);
 
   let margin = {
-    top: 20,
-    right: 30,
-    bottom: 40,
-    left: 30
+    top: 100,
+    right: 100,
+    bottom: 100,
+    left: 100
   }
 
   // need to remove the old svg when clicking a new state
@@ -366,7 +366,12 @@ function linechart(data) {
       "transform",
       "translate(0, " + (height - margin.bottom - margin.top) + ")"
   )
-  .call(xAxis);
+  .call(xAxis)
+  .selectAll("text")  
+  .style("text-anchor", "end")
+  .attr("dx", "-.8em")
+  .attr("dy", ".15em")
+  .attr("transform", "rotate(-65)");
 
   var yAxis = d3.axisLeft(yScale);
   chartGroup
@@ -424,7 +429,7 @@ function linechart(data) {
   .attr("id", "info")
   .attr("x", 0)
   .attr("y", 0)
-  .style("font-size", "30px")
+  .style("font-size", "1px")
   .style("background-color", "white")
   .style("display", "none");
 
