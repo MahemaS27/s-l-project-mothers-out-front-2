@@ -163,7 +163,7 @@ Dropdown menu with tiers of membership
   .enter()
   .append("path")
   .attr("d", path) // add projection
-  // clicked state change color to orange
+  // clicked state change color to purple
   .on("click", onStateClick)
   .attr("class", "states")
   .attr("fill", fillFunction);
@@ -209,7 +209,7 @@ var clicked = 1;
 function onStateClick(d){
 	if(clicked % 2 != 0){
   d3.selectAll('path').style('fill', null);
-  d3.select(this).style("fill", "orange"); 
+  d3.select(this).style("fill", "#8A2BE2"); 
   clicked += 1;
   // console.log(clicked);
 
