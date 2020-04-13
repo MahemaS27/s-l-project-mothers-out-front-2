@@ -14,6 +14,9 @@ color_tier = {"Total": '#FF0000',
                       "Volunteers": "#f2840f",
                       "Leading": "green"}
 
+var statesWeHave = ["Alabama", "California", "Colorado", "Massachusetts",
+    "Michigan", "New Hampshire", "New York", "Ohio", "Pennsylvania", 
+    "Virginia", "Washington"];
 
 var projection = d3
 .geoAlbersUsa()
@@ -224,33 +227,24 @@ function getCurrentState() {
 var clicked = 1;
 
 function onStateClick(d){
-	if(clicked % 2 != 0){
+
+  currentState = state_data[d.id];
+
+  let needToChange = statesWeHave.includes(currentState);
+  if(needToChange){
   d3.selectAll('path').style('fill', null);
   d3.select(this).style("fill", "#8A2BE2"); 
-  clicked += 1;
-  // console.log(clicked);
 
-  // here populate current state variable when user clicks
-  currentState = state_data[d.id];
   drawLineChart(state_code_data[currentState]);
-  //console.log(state_code_data[currentState]);
+  document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
+  }
 
-  	}
-  	else{
-  	d3.select(this).style("fill", null);
-  	clicked += 1;
-  	// console.log(clicked);
-
-  	currentState = 'USA';
-    drawLineChart(currentState);
-  	}  
-	document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
-
+  else
+  {
+  drawLineChart("USA");
+  document.getElementById('header').innerText='Membership Growth Overtime: '+ "USA";
+  }
 }
-
-// check if a state is valid
-// add a hover message to say "no data"
-
 
 
 /*
