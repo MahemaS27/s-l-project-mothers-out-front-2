@@ -110,6 +110,7 @@ var legend = svg
    .attr("class","legend")
    .attr("width", 140)
    .attr("height", 200)
+   .attr("y", 20)
    .selectAll("g")
    .data([
     {'color': '#FF0000', 'label': 'Total'},
@@ -124,7 +125,7 @@ var legend = svg
    .enter()
    .append("g")
    .attr("transform", function(d, i){
-    return "translate(0," + i * 20 + ")";
+    return "translate(0," + (i * 20 + 10) + ")";
    });
 
    legend
@@ -224,25 +225,28 @@ function getCurrentState() {
 
 //on state click function
 //variable to keep track of the clicks
-var clicked = 1;
+var clicked = false;
 
 function onStateClick(d){
 
   currentState = state_data[d.id];
 
   let needToChange = statesWeHave.includes(currentState);
-  if(needToChange){
+  if(needToChange && clicked == false){	
   d3.selectAll('path').style('fill', null);
   d3.select(this).style("fill", "#8A2BE2"); 
 
   drawLineChart(state_code_data[currentState]);
   document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
-  }
-
+  clicked = true;
+  } 
   else
   {
+  d3.selectAll('path').style('fill', null);
+  d3.select(this).style("fill", null); 
   drawLineChart("USA");
   document.getElementById('header').innerText='Membership Growth Overtime: '+ "USA";
+  clicked = false;
   }
 }
 
