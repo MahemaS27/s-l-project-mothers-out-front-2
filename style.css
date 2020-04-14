@@ -86,12 +86,13 @@ text {
 
 #map-container {
 	margin: auto;
-	margin-left: 200px;
+	margin-left: 150px;
 }
 
 #chart-container {
 	margin: auto;
-	margin-right: 200px;
+	margin-right: 150px;
+	padding-right: 100px;
 }
 
 /*.states{
