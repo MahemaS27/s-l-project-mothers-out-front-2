@@ -105,6 +105,7 @@ var svg = d3.select('#map-container')
   .range(["white", color_tier[currentTier]])
   .domain([-500, 3700]);
 
+// drawing the categorical legend
 var legend = svg
    .append("g")
    .attr("class","legend")
@@ -145,6 +146,43 @@ var legend = svg
    });
 
 
+/* NEW SECTION: add the continuous legend - color will change on the tier change */
+
+//Append a defs (for definition) element to your SVG
+  var defs = mapgroup.append("defs");
+
+//Append a linearGradient element to the defs and give it a unique id
+  var linearGradient = defs.append("linearGradient")
+  .attr("id", "linear-gradient");
+
+//Horizontal gradient, left to right
+  linearGradient
+  .attr("x1", "0%")
+  .attr("y1", "0%")
+  .attr("x2", "100%")
+  .attr("y2", "0%");
+
+
+//Set the color for the start- will always be white
+  linearGradient.append("stop")
+  .attr("offset", "0%")
+  .attr("stop-color", "#FFFFFF"); //white
+
+//Set the color for the end (100%)
+  linearGradient.append("stop")
+  .attr("offset", "100%")
+  .attr("stop-color",  color_tier[currentTier]); // will depend based on current color
+
+
+//Draw the rectangle and fill with gradient- append to mapgroup svg
+  mapgroup.append("rect")
+  .attr("width", 300)
+  .attr("height", 20)
+  .style("fill", "url(#linear-gradient)");
+
+
+
+// function to fill the states certain shades for choropleth
   let fillFunction = function(d){
 
   	//get all the state names
