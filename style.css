@@ -84,6 +84,7 @@ text {
 	display: flex;
 }
 
+
 #map-container {
 	margin: auto;
 	margin-left: 150px;
@@ -123,14 +124,15 @@ path:hover { /* On mouse hover, lighten state color */
 	fill-opacity: .7;
 }
 
-
-
 select {
   /* General styling */
   height: 30px;
   width: 100px;
+  position: relative;
   border-radius: 0;
   padding-left: 10px;
+  top: 110px;
+  left: 500px;
   }
 
 .dataLine {

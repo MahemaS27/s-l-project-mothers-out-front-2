@@ -114,10 +114,6 @@ var legend = svg
    .attr("y", 20)
    .selectAll("g")
    .data([
-    {'color': '#FF0000', 'label': 'Total'},
-    {'color': '#1f76b4', 'label' : 'Supporting'},
-    {'color': '#f2840f', 'label' : 'Volunteers'},
-    {'color': 'green', 'label' : 'Leading'},
     {'color': 'purple', 'label' : 'Selected State'},
     {'color': '#DCDCDC', 'label' : 'No data'}
     ]) //include the color and the actual word on the data
@@ -126,7 +122,7 @@ var legend = svg
    .enter()
    .append("g")
    .attr("transform", function(d, i){
-    return "translate(0," + (i * 20 + 10) + ")";
+    return "translate(0," + (i * 20 + 80) + ")";
    });
 
    legend
@@ -178,9 +174,34 @@ var legend = svg
   mapgroup.append("rect")
   .attr("width", 300)
   .attr("height", 20)
-  .style("fill", "url(#linear-gradient)");
+  .style("fill", "url(#linear-gradient)")
+  //change the position
+  .attr("x", 180)
+  .attr("y", 520);
 
+  mapgroup.append("text")
+  .attr("x", 250)
+  .attr("y", 560)
+  .attr("dy", ".35em")
+  .text("Membership Count");
 
+//add the tick marks on the continuous gradient
+
+  // var legendscale = d3.scaleLinear()
+  //   .range([1, //this should be the max for the count of a tire]);
+
+  // var legendaxis = d3.axisBottom()
+  //   .scale(legendscale)
+  //   .tickSize(6)
+  //   .ticks(8);
+
+  //   svg
+  //   .append("g")
+  //   .attr("class", "axis")
+  //   .attr("x", 300)
+  //   .attr("y", 400)
+  //   .call(legendaxis);
+  
 
 // function to fill the states certain shades for choropleth
   let fillFunction = function(d){
@@ -199,8 +220,6 @@ var legend = svg
 		//get the most current quarterly data 
 		//which is the last row of each subset
 		var index = allData[stateName].length - 1;
-
-
 
 		let tiers_dict = {"Total": allData[stateName][index].total,
                       "Supporting": allData[stateName][index].supporters,
@@ -468,6 +487,45 @@ function linechart(data) {
   .style("font-size", "1px")
   .style("background-color", "white")
   .style("display", "none");
+
+
+  // drawing the categorical legend
+var legend = svg
+   .append("g")
+   .attr("class","legend")
+   .attr("width", 140)
+   .attr("height", 200)
+   .attr("y", 20)
+   .selectAll("g")
+   .data([
+    {'color': '#FF0000', 'label': 'Total'},
+    {'color': '#1f76b4', 'label' : 'Supporting'},
+    {'color': '#f2840f', 'label' : 'Volunteers'},
+    {'color': 'green', 'label' : 'Leading'}
+    ]) //include the color and the actual word on the data
+   // always want to pass an array
+
+   .enter()
+   .append("g")
+   .attr("transform", function(d, i){
+    return "translate(120," + (i * 20 + 100) + ")";
+   });
+
+   legend
+   .append("rect")
+   .attr("width", 18)
+   .attr("height", 18)
+   .style("fill", function(d) {
+    return d.color;
+   });
+
+   legend.append("text")
+   .attr("x", 24)
+   .attr("y", 9)
+   .attr("dy", ".35em")
+   .text(function(d) {
+    return d.label;
+   });
 
 }
 
