@@ -508,7 +508,7 @@ var legend = svg
    .enter()
    .append("g")
    .attr("transform", function(d, i){
-    return "translate(120," + (i * 20 + 100) + ")";
+    return "translate(120," + (i * 20 + 50) + ")";
    });
 
    legend
