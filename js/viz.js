@@ -79,6 +79,7 @@ d3.json("js/us.json", function (us) {
 
 function drawMap(us, data, allData) {
 
+
   // need to remove the old svg when clicking a new state
 let d3selectMap = d3.select("#map-container svg");
   d3selectMap.remove();
@@ -169,6 +170,14 @@ var legend = svg
   .attr("offset", "100%")
   .attr("stop-color",  color_tier[currentTier]); // will depend based on current color
 
+  var legendscale = d3.scaleLinear()
+  .range([0, 1000]); //this should be the max for the count of a tier]);
+
+  var legendaxis = d3.axisBottom()
+  .scale(legendscale)
+  .tickSize(.5)
+  .ticks(5);
+
 
 //Draw the rectangle and fill with gradient- append to mapgroup svg
   mapgroup.append("rect")
@@ -179,28 +188,31 @@ var legend = svg
   .attr("x", 180)
   .attr("y", 520);
 
+  /* append the axis
+  mapgroup
+  .append("g")
+  .attr("class", "axis")
+  .attr("x", 300)
+  .attr("y", 100)
+  .call(legendaxis);
+*/
+
   mapgroup.append("text")
   .attr("x", 250)
   .attr("y", 560)
   .attr("dy", ".35em")
   .text("Membership Count");
 
+  /*low value on continous scale
+  mapgroup.append("text")
+    .attr("x", 170)
+    .attr("y", 500)
+    .attr("dy", ".35em")
+    .text("0");
+*/
 //add the tick marks on the continuous gradient
 
-  // var legendscale = d3.scaleLinear()
-  //   .range([1, //this should be the max for the count of a tire]);
 
-  // var legendaxis = d3.axisBottom()
-  //   .scale(legendscale)
-  //   .tickSize(6)
-  //   .ticks(8);
-
-  //   svg
-  //   .append("g")
-  //   .attr("class", "axis")
-  //   .attr("x", 300)
-  //   .attr("y", 400)
-  //   .call(legendaxis);
   
 
 // function to fill the states certain shades for choropleth
@@ -413,6 +425,8 @@ function linechart(data) {
 //Adding categorical color scale
   var color = d3.scaleOrdinal(d3.schemeCategory10);
 
+
+  // append the x axis
   var xAxis = d3.axisBottom(xScale);
   chartGroup
   .append("g")
@@ -428,6 +442,18 @@ function linechart(data) {
   .attr("dy", ".15em")
   .attr("transform", "rotate(-65)");
 
+
+
+  // appending the y axis label
+  chartGroup.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin.left)
+  .attr("x",(0 - (height / 2))+50)
+  .attr("dy", "1em")
+  .style("text-anchor", "middle" )
+  .text("Members");
+
+//append the y axis
   var yAxis = d3.axisLeft(yScale);
   chartGroup
   .append("g")
