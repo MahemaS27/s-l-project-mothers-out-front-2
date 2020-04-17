@@ -80,6 +80,8 @@ d3.json("js/us.json", function (us) {
 
 function drawMap(us, data, allData) {
 
+  currentState = 'USA';
+
   // need to remove the old svg when clicking a new state
   let d3selectMap = d3.select("#map-container svg");
   d3selectMap.remove();
