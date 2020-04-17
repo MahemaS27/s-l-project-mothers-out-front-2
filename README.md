@@ -8,7 +8,7 @@ Make sure you publish your project to github pages, and put the URL here: https:
 
 ## Demo Video
 
-TO BE ADDED
+https://drive.google.com/open?id=1zvqOz87LuZNWnJNiY6khgc0C21VBteb3
 
 ## Setup
 
