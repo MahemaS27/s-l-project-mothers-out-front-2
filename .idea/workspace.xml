@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8218fd52-36b5-4964-8b42-f00c3c23ef3e" name="Default Changelist" comment="update header">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    <list default="true" id="8218fd52-36b5-4964-8b42-f00c3c23ef3e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/js/viz.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/viz.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +59,7 @@
           <entry key="css" value="127" />
           <entry key="html" value="791" />
           <entry key="js" value="5654" />
-          <entry key="txt" value="692" />
+          <entry key="txt" value="706" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -67,7 +67,7 @@
           <entry key="CSS" value="127" />
           <entry key="HTML" value="791" />
           <entry key="JavaScript" value="5654" />
-          <entry key="PLAIN_TEXT" value="720" />
+          <entry key="PLAIN_TEXT" value="734" />
         </counts>
       </usages-collector>
     </session>
@@ -83,20 +83,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/viz.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-292">
-              <caret line="485" selection-start-line="485" selection-end-line="485" />
+            <state relative-caret-position="455">
+              <caret line="309" column="1" selection-start-line="309" selection-start-column="1" selection-end-line="309" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="33" column="62" lean-forward="true" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+            <state relative-caret-position="367">
+              <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -161,8 +161,8 @@
         <option value="$PROJECT_DIR$/LICENSE" />
         <option value="$PROJECT_DIR$/data/VA_quarters.csv" />
         <option value="$PROJECT_DIR$/style.css" />
-        <option value="$PROJECT_DIR$/js/viz.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/viz.js" />
       </list>
     </option>
   </component>
@@ -377,7 +377,7 @@
       <workItem from="1586727551179" duration="622000" />
       <workItem from="1586966517159" duration="6321000" />
       <workItem from="1587143594576" duration="809000" />
-      <workItem from="1587146792627" duration="247000" />
+      <workItem from="1587146792627" duration="501000" />
     </task>
     <task id="LOCAL-00001" summary="added drop down">
       <created>1585782791128</created>
@@ -505,11 +505,25 @@
       <option name="project" value="LOCAL" />
       <updated>1587146874652</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="update header">
+      <created>1587147050773</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1587147050773</updated>
+    </task>
+    <task id="LOCAL-00020" summary="updates header">
+      <created>1587147123577</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1587147123577</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41042000" />
+    <option name="totallyTimeSpent" value="41296000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -634,7 +648,9 @@
     <MESSAGE value="edit to index.html" />
     <MESSAGE value="added gradient rectangle for color scale-need to reposition and add max/min. Added the citation for source as well." />
     <MESSAGE value="added a y axis label" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a y axis label" />
+    <MESSAGE value="update header" />
+    <MESSAGE value="updates header" />
+    <option name="LAST_COMMIT_MESSAGE" value="updates header" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/data/us-state-names.tsv">
@@ -699,17 +715,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/viz.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-292">
-          <caret line="485" selection-start-line="485" selection-end-line="485" />
+        <state relative-caret-position="367">
+          <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/js/viz.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="33" column="62" lean-forward="true" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+        <state relative-caret-position="455">
+          <caret line="309" column="1" selection-start-line="309" selection-start-column="1" selection-end-line="309" selection-end-column="1" />
         </state>
       </provider>
     </entry>
