@@ -9,85 +9,89 @@ var currentYear = 2020;
 var currentTier = 'Total';
 
 // colors associated with each tier
-color_tier = {"Total": '#FF0000',
-                      "Supporting": "#1f76b4",
-                      "Volunteers": "#f2840f",
-                      "Leading": "green"}
+color_tier = {
+  "Total": '#FF0000',
+  "Supporting": "#1f76b4",
+  "Volunteers": "#f2840f",
+  "Leading": "green"
+}
 
 var statesWeHave = ["Alabama", "California", "Colorado", "Massachusetts",
-    "Michigan", "New Hampshire", "New York", "Ohio", "Pennsylvania", 
-    "Virginia", "Washington"];
+  "Michigan", "New Hampshire", "New York", "Ohio", "Pennsylvania",
+  "Virginia", "Washington"];
 
 var projection = d3
-.geoAlbersUsa()
-.translate([width / 2, height / 2])
-.scale(width);
+  .geoAlbersUsa()
+  .translate([width / 2, height / 2])
+  .scale(width);
 
 var path = d3.geoPath().projection(projection);
 
 var state_data = {}; // has id : name of state // for drawing map
-var state_code_data={}; // has name of state : abbreviation
+var state_code_data = {}; // has name of state : abbreviation
 
 // var national_data = getNatlData(); //Todo not implemented yet
 
 d3.json("js/us.json", function (us) {
   d3.tsv("data/us-state-names.tsv", function (data) {
 
-	//add all the subsets we would work on
-  	d3.csv("data/AL_quarters.csv", function(AL){
-  	d3.csv("data/CA_quarters.csv", function(CA){
-  		d3.csv("data/CO_quarters.csv", function(CO){
-  			d3.csv("data/MA_quarters.csv", function(MA){
-  				d3.csv("data/MI_quarters.csv", function(MI){
-  					d3.csv("data/NH_quarters.csv", function(NH){
-  						d3.csv("data/NY_quarters.csv", function(NY){
-  							d3.csv("data/OH_quarters.csv", function(OH){
-  								d3.csv("data/PA_quarters.csv", function(PA){
-  									d3.csv("data/VA_quarters.csv", function(VA){
-  										d3.csv("data/WA_quarters.csv", function(WA){
-    for (i of data) {
+    //add all the subsets we would work on
+    d3.csv("data/AL_quarters.csv", function (AL) {
+      d3.csv("data/CA_quarters.csv", function (CA) {
+        d3.csv("data/CO_quarters.csv", function (CO) {
+          d3.csv("data/MA_quarters.csv", function (MA) {
+            d3.csv("data/MI_quarters.csv", function (MI) {
+              d3.csv("data/NH_quarters.csv", function (NH) {
+                d3.csv("data/NY_quarters.csv", function (NY) {
+                  d3.csv("data/OH_quarters.csv", function (OH) {
+                    d3.csv("data/PA_quarters.csv", function (PA) {
+                      d3.csv("data/VA_quarters.csv", function (VA) {
+                        d3.csv("data/WA_quarters.csv", function (WA) {
+                          for (i of data) {
 
-      state_data[i.id] = i.name
-    }
+                            state_data[i.id] = i.name
+                          }
 
-    for (i of data){
-      state_code_data[i.name]=i.code
-    }
+                          for (i of data) {
+                            state_code_data[i.name] = i.code
+                          }
 
-    //make the subsets into a data frame 
-    var allData = {"Alabama": AL, "California": CA, "Colorado":CO, "Massachusetts": MA,
-    "Michigan": MI, "New Hampshire": NH, "New York": NY, "Ohio": OH, "Pennsylvania": PA, 
-    "Virginia": VA,"Washington":WA };
+                          //make the subsets into a data frame 
+                          var allData = {
+                            "Alabama": AL, "California": CA, "Colorado": CO, "Massachusetts": MA,
+                            "Michigan": MI, "New Hampshire": NH, "New York": NY, "Ohio": OH, "Pennsylvania": PA,
+                            "Virginia": VA, "Washington": WA
+                          };
 
 
-    drawMap(us, data, allData);
-    drawLineChart(currentState);
+                          drawMap(us, data, allData);
+                          drawLineChart(currentState);
 
-});  
-});  
-});  
-});  
-}); 
-});  
-});  
-});  
-});  
-});
-});
-});  
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
 });
 
 function drawMap(us, data, allData) {
 
 
   // need to remove the old svg when clicking a new state
-let d3selectMap = d3.select("#map-container svg");
+  let d3selectMap = d3.select("#map-container svg");
   d3selectMap.remove();
 
-var svg = d3.select('#map-container')
-.append('svg')
-.attr('width', width)
-.attr('height', height)
+  var svg = d3.select('#map-container')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height)
 
 
   // set the national max scale
@@ -95,7 +99,7 @@ var svg = d3.select('#map-container')
 
   // adding the header
 
-  document.getElementById('header').innerHTML= 'Membership Growth Overtime: '+ getCurrentState();
+  document.getElementById('header').innerHTML = 'Membership Growth Overtime: ' + getCurrentState();
 
   //drawing map boundaries
 
@@ -103,90 +107,90 @@ var svg = d3.select('#map-container')
 
   // define color scale
   var myColor = d3.scaleLinear()
-  .range(["white", color_tier[currentTier]])
-  .domain([-500, 3700]);
+    .range(["white", color_tier[currentTier]])
+    .domain([-500, 3700]);
 
-// drawing the categorical legend
-var legend = svg
-   .append("g")
-   .attr("class","legend")
-   .attr("width", 140)
-   .attr("height", 200)
-   .attr("y", 20)
-   .selectAll("g")
-   .data([
-    {'color': 'purple', 'label' : 'Selected State'},
-    {'color': '#DCDCDC', 'label' : 'No data'}
+  // drawing the categorical legend
+  var legend = svg
+    .append("g")
+    .attr("class", "legend")
+    .attr("width", 140)
+    .attr("height", 200)
+    .attr("y", 20)
+    .selectAll("g")
+    .data([
+      { 'color': 'purple', 'label': 'Selected State' },
+      { 'color': '#DCDCDC', 'label': 'No data' }
     ]) //include the color and the actual word on the data
-   // always want to pass an array
+    // always want to pass an array
 
-   .enter()
-   .append("g")
-   .attr("transform", function(d, i){
-    return "translate(0," + (i * 20 + 80) + ")";
-   });
+    .enter()
+    .append("g")
+    .attr("transform", function (d, i) {
+      return "translate(0," + (i * 20 + 80) + ")";
+    });
 
-   legend
-   .append("rect")
-   .attr("width", 18)
-   .attr("height", 18)
-   .style("fill", function(d) {
-    return d.color;
-   });
+  legend
+    .append("rect")
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", function (d) {
+      return d.color;
+    });
 
-   legend.append("text")
-   .attr("x", 24)
-   .attr("y", 9)
-   .attr("dy", ".35em")
-   .text(function(d) {
-    return d.label;
-   });
+  legend.append("text")
+    .attr("x", 24)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .text(function (d) {
+      return d.label;
+    });
 
 
-/* NEW SECTION: add the continuous legend - color will change on the tier change */
+  /* NEW SECTION: add the continuous legend - color will change on the tier change */
 
-//Append a defs (for definition) element to your SVG
+  //Append a defs (for definition) element to your SVG
   var defs = mapgroup.append("defs");
 
-//Append a linearGradient element to the defs and give it a unique id
+  //Append a linearGradient element to the defs and give it a unique id
   var linearGradient = defs.append("linearGradient")
-  .attr("id", "linear-gradient");
+    .attr("id", "linear-gradient");
 
-//Horizontal gradient, left to right
+  //Horizontal gradient, left to right
   linearGradient
-  .attr("x1", "0%")
-  .attr("y1", "0%")
-  .attr("x2", "100%")
-  .attr("y2", "0%");
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%");
 
 
-//Set the color for the start- will always be white
+  //Set the color for the start- will always be white
   linearGradient.append("stop")
-  .attr("offset", "0%")
-  .attr("stop-color", "#FFFFFF"); //white
+    .attr("offset", "0%")
+    .attr("stop-color", "#FFFFFF"); //white
 
-//Set the color for the end (100%)
+  //Set the color for the end (100%)
   linearGradient.append("stop")
-  .attr("offset", "100%")
-  .attr("stop-color",  color_tier[currentTier]); // will depend based on current color
+    .attr("offset", "100%")
+    .attr("stop-color", color_tier[currentTier]); // will depend based on current color
 
   var legendscale = d3.scaleLinear()
-  .range([0, 1000]); //this should be the max for the count of a tier]);
+    .range([0, 1000]); //this should be the max for the count of a tier]);
 
   var legendaxis = d3.axisBottom()
-  .scale(legendscale)
-  .tickSize(.5)
-  .ticks(5);
+    .scale(legendscale)
+    .tickSize(.5)
+    .ticks(5);
 
 
-//Draw the rectangle and fill with gradient- append to mapgroup svg
+  //Draw the rectangle and fill with gradient- append to mapgroup svg
   mapgroup.append("rect")
-  .attr("width", 300)
-  .attr("height", 20)
-  .style("fill", "url(#linear-gradient)")
-  //change the position
-  .attr("x", 180)
-  .attr("y", 520);
+    .attr("width", 300)
+    .attr("height", 20)
+    .style("fill", "url(#linear-gradient)")
+    //change the position
+    .attr("x", 180)
+    .attr("y", 520);
 
   /* append the axis
   mapgroup
@@ -195,13 +199,13 @@ var legend = svg
   .attr("x", 300)
   .attr("y", 100)
   .call(legendaxis);
-*/
+  */
 
   mapgroup.append("text")
-  .attr("x", 250)
-  .attr("y", 560)
-  .attr("dy", ".35em")
-  .text("Membership Count");
+    .attr("x", 250)
+    .attr("y", 560)
+    .attr("dy", ".35em")
+    .text("Membership Count");
 
   /*low value on continous scale
   mapgroup.append("text")
@@ -210,60 +214,62 @@ var legend = svg
     .attr("dy", ".35em")
     .text("0");
 */
-//add the tick marks on the continuous gradient
+  //add the tick marks on the continuous gradient
 
 
-  
 
-// function to fill the states certain shades for choropleth
-  let fillFunction = function(d){
 
-  	//get all the state names
-	let stateName = data.filter(function(n) { return n.id == d.id })[0].name
+  // function to fill the states certain shades for choropleth
+  let fillFunction = function (d) {
 
-	//the states we have -> get all keys for the dict 
-	let weHave = Object.keys(allData);
+    //get all the state names
+    let stateName = data.filter(function (n) { return n.id == d.id })[0].name
 
-	//check if the state we are drawing is the one that need to change the color
-	let needToChange = weHave.includes(stateName);
+    //the states we have -> get all keys for the dict 
+    let weHave = Object.keys(allData);
 
-	if (needToChange) {
+    //check if the state we are drawing is the one that need to change the color
+    let needToChange = weHave.includes(stateName);
 
-		//get the most current quarterly data 
-		//which is the last row of each subset
-		var index = allData[stateName].length - 1;
+    if (needToChange) {
 
-		let tiers_dict = {"Total": allData[stateName][index].total,
-                      "Supporting": allData[stateName][index].supporters,
-                      "Volunteers": allData[stateName][index].volunteers,
-                      "Leading": allData[stateName][index].leaders}
+      //get the most current quarterly data 
+      //which is the last row of each subset
+      var index = allData[stateName].length - 1;
 
-		//return the color given the count, according to our color scale
+      let tiers_dict = {
+        "Total": allData[stateName][index].total,
+        "Supporting": allData[stateName][index].supporters,
+        "Volunteers": allData[stateName][index].volunteers,
+        "Leading": allData[stateName][index].leaders
+      }
 
-		return myColor(tiers_dict[currentTier]);
-		} else {
-		return "#DCDCDC";
-		}
-  	}
+      //return the color given the count, according to our color scale
 
-/*
-Dropdown menu with tiers of membership
- */
+      return myColor(tiers_dict[currentTier]);
+    } else {
+      return "#DCDCDC";
+    }
+  }
+
+  /*
+  Dropdown menu with tiers of membership
+   */
   mapgroup.append("g")
-  .selectAll("path")
-  .data(topojson.feature(us, us.objects.states).features)
-  .enter()
-  .append("path")
-  .attr("d", path) // add projection
-  // clicked state change color to purple
-  .on("click", onStateClick)
-  .attr("class", "states")
-  .attr("fill", fillFunction);
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter()
+    .append("path")
+    .attr("d", path) // add projection
+    // clicked state change color to purple
+    .on("click", onStateClick)
+    .attr("class", "states")
+    .attr("fill", fillFunction);
 
-  var selectbox = d3.select("#selectbox").on("change", function() {
+  var selectbox = d3.select("#selectbox").on("change", function () {
     let selected = document.getElementById('selectbox');
 
-    currentTier =  selected.options[selected.selectedIndex].value
+    currentTier = selected.options[selected.selectedIndex].value
     console.log(currentTier);
     // call drawMap again to change color and data
 
@@ -273,16 +279,16 @@ Dropdown menu with tiers of membership
   });
 
 
-// adding state border
+  // adding state border
   mapgroup
-  .append('path')
-  .datum(
+    .append('path')
+    .datum(
       topojson.mesh(us, us.objects.states, function (a, b) {
         return a !== b;
       })
-  )
-  .attr("id", "state-borders")
-  .attr("d", path);
+    )
+    .attr("id", "state-borders")
+    .attr("d", path);
 
 }
 
@@ -296,26 +302,25 @@ function getCurrentState() {
 //variable to keep track of the clicks
 var clicked = false;
 
-function onStateClick(d){
+function onStateClick(d) {
 
   currentState = state_data[d.id];
 
   let needToChange = statesWeHave.includes(currentState);
-  if(needToChange && clicked == false){	
-  d3.selectAll('path').style('fill', null);
-  d3.select(this).style("fill", "#8A2BE2"); 
+  if (needToChange && clicked == false) {
+    d3.selectAll('path').style('fill', null);
+    d3.select(this).style("fill", "#8A2BE2");
 
-  drawLineChart(state_code_data[currentState]);
-  document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
-  clicked = true;
-  } 
-  else
-  {
-  d3.selectAll('path').style('fill', null);
-  d3.select(this).style("fill", null); 
-  drawLineChart("USA");
-  document.getElementById('header').innerText='Membership Growth Overtime: '+ "USA";
-  clicked = false;
+    drawLineChart(state_code_data[currentState]);
+    document.getElementById('header').innerText = 'Membership Growth Overtime: ' + getCurrentState();
+    clicked = true;
+  }
+  else {
+    d3.selectAll('path').style('fill', null);
+    d3.select(this).style("fill", null);
+    drawLineChart("USA");
+    document.getElementById('header').innerText = 'Membership Growth Overtime: ' + "USA";
+    clicked = false;
   }
 }
 
@@ -325,13 +330,13 @@ LINE CHART CODE
 NOTE: This code is adapted from aditeya's in class linechart interaction example. The source is cited in the index.html. :)
  */
 
-function drawLineChart(state){ //state should be state abbreviation in string
-//console.log("I am here", state);
-var parseDate = d3.timeParse("%Y-%m-%d"); //Time format was different in the count dataset. So handling the parsing.
+function drawLineChart(state) { //state should be state abbreviation in string
+  //console.log("I am here", state);
+  var parseDate = d3.timeParse("%Y-%m-%d"); //Time format was different in the count dataset. So handling the parsing.
 
-d3.csv(
+  d3.csv(
     "data/" + state + "_quarters.csv", // replace with current state
-    function(d) {
+    function (d) {
       return {
         dates: parseDate(d.dates),
         supporters: +d.supporters,
@@ -341,7 +346,7 @@ d3.csv(
       };
     },
     linechart
-);
+  );
 }
 
 
@@ -350,7 +355,7 @@ function linechart(data) {
 
   //============Wrangling Data for Creating Multi_Line Visualization===================
   var supporters = [];
-  var volunteers= [];
+  var volunteers = [];
   var leaders = [];
   var totals = [];
 
@@ -358,7 +363,7 @@ function linechart(data) {
     supporters.push({ dates: element.dates, count: element.supporters });
     volunteers.push({ dates: element.dates, count: element.volunteers });
     leaders.push({ dates: element.dates, count: element.leaders });
-    totals.push({dates:element.dates, count:element.total})
+    totals.push({ dates: element.dates, count: element.total })
   });
 
 
@@ -399,163 +404,158 @@ function linechart(data) {
   d3select.remove();
 
   let svg = d3
-  .select("#chart-container")
-  .append("svg")
-  .attr("width", width)
-  .attr("height", height);
+    .select("#chart-container")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
   // adding the chart subelement
 
   var chartGroup = svg
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// axis of line chart
+  // axis of line chart
 
   var xScale = d3
-  .scaleTime()
-  .domain([minDate, maxDate])
-  .range([0, width]);
+    .scaleTime()
+    .domain([minDate, maxDate])
+    .range([0, width]);
 
   var yScale = d3
-  .scaleLinear()
-  .domain([0, maxCount])
-  .range([height - margin.bottom - margin.top, 0]);
+    .scaleLinear()
+    .domain([0, maxCount])
+    .range([height - margin.bottom - margin.top, 0]);
 
-//Adding categorical color scale
+  //Adding categorical color scale
   var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 
   // append the x axis
   var xAxis = d3.axisBottom(xScale);
   chartGroup
-  .append("g")
-  .attr("class", "x axis")
-  .attr(
+    .append("g")
+    .attr("class", "x axis")
+    .attr(
       "transform",
       "translate(0, " + (height - margin.bottom - margin.top) + ")"
-  )
-  .call(xAxis)
-  .selectAll("text")  
-  .style("text-anchor", "end")
-  .attr("dx", "-.8em")
-  .attr("dy", ".15em")
-  .attr("transform", "rotate(-65)");
+    )
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", ".15em")
+    .attr("transform", "rotate(-65)");
 
 
 
   // appending the y axis label
   chartGroup.append("text")
-  .attr("transform", "rotate(-90)")
-  .attr("y", 0 - margin.left)
-  .attr("x",(0 - (height / 2))+50)
-  .attr("dy", "1em")
-  .style("text-anchor", "middle" )
-  .text("Members");
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x", (0 - (height / 2)) + 50)
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Members");
 
-//append the y axis
+  //append the y axis
   var yAxis = d3.axisLeft(yScale);
   chartGroup
-  .append("g")
-  .attr("class", "y axis")
-  .attr("transform", "translate(0, 0)")
-  .call(yAxis);
+    .append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(0, 0)")
+    .call(yAxis);
 
   var line = d3
-  .line()
-  .x(function(d) {
-    return xScale(d.dates);
-  })
-  .y(function(d) {
-    return yScale(d.count);
-  });
+    .line()
+    .x(function (d) {
+      return xScale(d.dates);
+    })
+    .y(function (d) {
+      return yScale(d.count);
+    });
 
   chartGroup
-  .append("g")
-  .selectAll("path")
-  .data(series)
-  .enter()
-  .append("path")
-  .attr("d", function(d, i) {
-    return line(d.count);
-  })
-  .style("stroke", function(d, i) {
-    return color(d.id);
-  })
-  .attr("class", "dataLine")
-  .attr("id", function(d) {
-    return d.id; // Adding an id to select the visualization for interactivity with external html elements (selectbox)
-  })
+    .append("g")
+    .selectAll("path")
+    .data(series)
+    .enter()
+    .append("path")
+    .attr("d", function (d, i) {
+      return line(d.count);
+    })
+    .style("stroke", function (d, i) {
+      return color(d.id);
+    })
+    .attr("class", "dataLine")
+    .attr("id", function (d) {
+      return d.id; // Adding an id to select the visualization for interactivity with external html elements (selectbox)
+    })
 
-  .on("mouseover", function(d) {
-    // Selected Element
-    d3.select("#info")
-    .attr("x", d3.mouse(this)[0] + 10) // Padding to move text away from the mouse pointer
-    .attr("y", d3.mouse(this)[1] + 15) // Padding to move text away from the mouse pointer
-    .style("display", "")
-    .text(d.id);
-  })
+    .on("mouseover", function (d) {
+      // Selected Element
+      d3.select("#info")
+        .attr("x", d3.mouse(this)[0] + 10) // Padding to move text away from the mouse pointer
+        .attr("y", d3.mouse(this)[1] + 15) // Padding to move text away from the mouse pointer
+        .style("display", "")
+        .text(d.id);
+    })
 
-  .on("mouseout", function(d) {
-    // Remove Label
-    d3.select("#info").style("display", "none");
+    .on("mouseout", function (d) {
+      // Remove Label
+      d3.select("#info").style("display", "none");
 
-    //Restore the opacity of all paths
-    d3.selectAll("path").attr("opacity", "1");
-  });
+      //Restore the opacity of all paths
+      d3.selectAll("path").attr("opacity", "1");
+    });
 
   // Adding a text element to show the tier name
   chartGroup
-  .append("text")
-  .attr("id", "info")
-  .attr("x", 0)
-  .attr("y", 0)
-  .style("font-size", "1px")
-  .style("background-color", "white")
-  .style("display", "none");
+    .append("text")
+    .attr("id", "info")
+    .attr("x", 0)
+    .attr("y", 0)
+    .style("font-size", "1px")
+    .style("background-color", "white")
+    .style("display", "none");
 
 
   // drawing the categorical legend
-var legend = svg
-   .append("g")
-   .attr("class","legend")
-   .attr("width", 140)
-   .attr("height", 200)
-   .attr("y", 20)
-   .selectAll("g")
-   .data([
-    {'color': '#FF0000', 'label': 'Total'},
-    {'color': '#1f76b4', 'label' : 'Supporting'},
-    {'color': '#f2840f', 'label' : 'Volunteers'},
-    {'color': 'green', 'label' : 'Leading'}
+  var legend = svg
+    .append("g")
+    .attr("class", "legend")
+    .attr("width", 140)
+    .attr("height", 200)
+    .attr("y", 20)
+    .selectAll("g")
+    .data([
+      { 'color': '#FF0000', 'label': 'Total' },
+      { 'color': '#1f76b4', 'label': 'Supporting' },
+      { 'color': '#f2840f', 'label': 'Volunteers' },
+      { 'color': 'green', 'label': 'Leading' }
     ]) //include the color and the actual word on the data
-   // always want to pass an array
+    // always want to pass an array
 
-   .enter()
-   .append("g")
-   .attr("transform", function(d, i){
-    return "translate(120," + (i * 20 + 50) + ")";
-   });
+    .enter()
+    .append("g")
+    .attr("transform", function (d, i) {
+      return "translate(120," + (i * 20 + 50) + ")";
+    });
 
-   legend
-   .append("rect")
-   .attr("width", 18)
-   .attr("height", 18)
-   .style("fill", function(d) {
-    return d.color;
-   });
+  legend
+    .append("rect")
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", function (d) {
+      return d.color;
+    });
 
-   legend.append("text")
-   .attr("x", 24)
-   .attr("y", 9)
-   .attr("dy", ".35em")
-   .text(function(d) {
-    return d.label;
-   });
+  legend.append("text")
+    .attr("x", 24)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .text(function (d) {
+      return d.label;
+    });
 
 }
-
-
-
-
-
