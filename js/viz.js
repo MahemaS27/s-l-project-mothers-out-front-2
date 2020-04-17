@@ -498,7 +498,7 @@ function linechart(data) {
     .attr("id", "info")
     .attr("x", 0)
     .attr("y", 0)
-    .style("font-size", "1px")
+    .style("font-size", "32px")
     .style("background-color", "white")
     .style("display", "none");
 
