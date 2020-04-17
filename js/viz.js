@@ -30,8 +30,6 @@ var path = d3.geoPath().projection(projection);
 var state_data = {}; // has id : name of state // for drawing map
 var state_code_data = {}; // has name of state : abbreviation
 
-// var national_data = getNatlData(); //Todo not implemented yet
-
 d3.json("js/us.json", function (us) {
   d3.tsv("data/us-state-names.tsv", function (data) {
 
@@ -48,7 +46,6 @@ d3.json("js/us.json", function (us) {
                       d3.csv("data/VA_quarters.csv", function (VA) {
                         d3.csv("data/WA_quarters.csv", function (WA) {
                           for (i of data) {
-
                             state_data[i.id] = i.name
                           }
 
@@ -83,7 +80,6 @@ d3.json("js/us.json", function (us) {
 
 function drawMap(us, data, allData) {
 
-
   // need to remove the old svg when clicking a new state
   let d3selectMap = d3.select("#map-container svg");
   d3selectMap.remove();
@@ -93,13 +89,9 @@ function drawMap(us, data, allData) {
     .attr('width', width)
     .attr('height', height)
 
-
-  // set the national max scale
-  // maxScale = getMaxScale();
-
   // adding the header
 
-  document.getElementById('header').innerHTML = 'Membership Growth Overtime: ' + getCurrentState();
+  document.getElementById('header').innerHTML = 'Membership Growth Overtime: ' + currentState;
 
   //drawing map boundaries
 
@@ -146,7 +138,6 @@ function drawMap(us, data, allData) {
       return d.label;
     });
 
-
   /* NEW SECTION: add the continuous legend - color will change on the tier change */
 
   //Append a defs (for definition) element to your SVG
@@ -162,7 +153,6 @@ function drawMap(us, data, allData) {
     .attr("y1", "0%")
     .attr("x2", "100%")
     .attr("y2", "0%");
-
 
   //Set the color for the start- will always be white
   linearGradient.append("stop")
@@ -213,7 +203,7 @@ function drawMap(us, data, allData) {
     .attr("y", 500)
     .attr("dy", ".35em")
     .text("0");
-*/
+  */
   //add the tick marks on the continuous gradient
 
 
@@ -292,14 +282,8 @@ function drawMap(us, data, allData) {
 
 }
 
-
-// getter method for return the current state
-function getCurrentState() {
-  return currentState;
-}
-
-//on state click function
-//variable to keep track of the clicks
+// on state click function
+// variable to keep track of the clicks
 var clicked = false;
 
 function onStateClick(d) {
@@ -312,10 +296,9 @@ function onStateClick(d) {
     d3.select(this).style("fill", "#8A2BE2");
 
     drawLineChart(state_code_data[currentState]);
-    document.getElementById('header').innerText = 'Membership Growth Overtime: ' + getCurrentState();
+    document.getElementById('header').innerText = 'Membership Growth Overtime: ' + currentState;
     clicked = true;
-  }
-  else {
+  } else {
     d3.selectAll('path').style('fill', null);
     d3.select(this).style("fill", null);
     drawLineChart("USA");
@@ -328,7 +311,7 @@ function onStateClick(d) {
 /*
 LINE CHART CODE
 NOTE: This code is adapted from aditeya's in class linechart interaction example. The source is cited in the index.html. :)
- */
+*/
 
 function drawLineChart(state) { //state should be state abbreviation in string
   //console.log("I am here", state);
