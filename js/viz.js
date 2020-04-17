@@ -282,29 +282,27 @@ function drawMap(us, data, allData) {
 
 }
 
-//on state click function
-//variable to keep track of the clicks
+// on state click function
+// variable to keep track of the clicks
 var clicked = false;
 
-function onStateClick(d){
+function onStateClick(d) {
 
   currentState = state_data[d.id];
 
   let needToChange = statesWeHave.includes(currentState);
-  if(needToChange && clicked == false){
+  if (needToChange && clicked == false) {
     d3.selectAll('path').style('fill', null);
     d3.select(this).style("fill", "#8A2BE2");
 
     drawLineChart(state_code_data[currentState]);
-    document.getElementById('header').innerText='Membership Growth Overtime: '+ getCurrentState();
+    document.getElementById('header').innerText = 'Membership Growth Overtime: ' + currentState;
     clicked = true;
-  }
-  else
-  {
+  } else {
     d3.selectAll('path').style('fill', null);
     d3.select(this).style("fill", null);
     drawLineChart("USA");
-    document.getElementById('header').innerText='Membership Growth Overtime: '+ "USA";
+    document.getElementById('header').innerText = 'Membership Growth Overtime: ' + "USA";
     clicked = false;
   }
 }
