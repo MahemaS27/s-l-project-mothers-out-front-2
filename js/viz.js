@@ -439,7 +439,7 @@ function linechart(data) {
     .attr("x", (0 - (height / 2)) + 50)
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Members");
+    .text("Member Count");
 
   //append the y axis
   var yAxis = d3.axisLeft(yScale);
